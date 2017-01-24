@@ -1,4 +1,4 @@
-The ProxiBlue Gift Promotions Extension is now open source
+The ProxiBlue Gift Promotions Extension is now FREE
 ==========================================================
 
 Unfortunately due to personal time issues, contractual work related time
