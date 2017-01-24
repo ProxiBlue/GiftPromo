@@ -1,0 +1,19 @@
+
+#category_info_tabs_giftpromo_content .rule-tree .entry-edit-head {
+    display: none;
+}
+
+#category_info_tabs_giftpromo_content .rule-tree {
+    white-space: nowrap;
+}
+
+#category_info_tabs_giftpromo_content .rule-tree .rule-param-start {
+    padding-left: 0px !important;
+    border: none;
+}
+
+#category_info_tabs_giftpromo_content .rule-param input, .rule-param select {
+    width: auto !important;
+    min-width: 50px;
+}
+

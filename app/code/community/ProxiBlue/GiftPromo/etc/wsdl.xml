@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:typens="urn:{{var wsdl.name}}" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             name="{{var wsdl.name}}" targetNamespace="urn:{{var wsdl.name}}">
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:Magento">
+            <import namespace="http://schemas.xmlsoap.org/soap/encoding/"
+                    schemaLocation="http://schemas.xmlsoap.org/soap/encoding/"/>
+            <complexType name="giftpromoRuleEntityArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:giftpromoRuleEntity[]"/>
+                    </restriction>
+                </complexContent>
+            </complexType>
+            <complexType name="giftpromoRulePromotionEntityArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:giftpromoRulePromotionEntity[]"/>
+                    </restriction>
+                </complexContent>
+            </complexType>
+            <complexType name="giftpromoRulePromotionEntity">
+                <all>
+                    <element name="sku" type="xsd:string" minOccurs="0"/>
+                    <element name="price" type="xsd:double" minOccurs="0"/>
+                    <element name="gifted_message" type="xsd:string" minOccurs="0"/>
+                    <element name="gifted_label" type="xsd:string" minOccurs="0"/>
+                    <element name="gifted_position" type="xsd:int" minOccurs="0"/>
+                    <element name="gifted_qty_max" type="xsd:int" minOccurs="0"/>
+                    <element name="rate_product_qty" type="xsd:int" minOccurs="0"/>
+                    <element name="rate_gift_rate" type="xsd:int" minOccurs="0"/>
+                </all>
+            </complexType>
+            <complexType name="giftpromoRuleConditionsEntityArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:giftpromoRuleConditionsEntity[]"/>
+                    </restriction>
+                </complexContent>
+            </complexType>
+            <complexType name="giftpromoRuleConditionsEntity">
+                <all>
+                    <element name="attribute" type="xsd:string" minOccurs="0"/>
+                    <element name="value" type="xsd:string" minOccurs="0"/>
+                    <element name="operator" type="xsd:string" minOccurs="0"/>
+                </all>
+            </complexType>
+            <complexType name="giftpromoRuleEntity">
+                <all>
+                    <element name="rule_id" type="xsd:int" minOccurs="0"/>
+                    <element name="rule_name" type="xsd:string" minOccurs="0"/>
+                    <element name="description" type="xsd:string" minOccurs="0"/>
+                    <element name="from_date" type="xsd:string" minOccurs="0"/>
+                    <element name="to_date" type="xsd:string" minOccurs="0"/>
+                    <element name="is_active" type="xsd:int" minOccurs="0"/>
+                    <element name="usage_limit" type="xsd:int" minOccurs="0"/>
+                    <element name="conditions" type="typens:giftpromoRuleConditionsEntityArray" minOccurs="0"/>
+                    <element name="promotion" type="typens:giftpromoRulePromotionEntityArray" minOccurs="0"/>
+                    <element name="customer_ids" type="typens:ArrayOfString" minOccurs="0"/>
+                    <element name="website_ids" type="typens:ArrayOfString" minOccurs="0"/>
+                    <element name="websites" type="typens:ArrayOfString" minOccurs="0"/>
+                    <element name="allow_gift_selection_count" type="xsd:int" minOccurs="0"/>
+                </all>
+            </complexType>
+        </schema>
+    </types>
+    <message name="giftpromoRuleCreateRequest">
+        <part name="sessionId" type="xsd:string"/>
+        <part name="ruleData" type="typens:giftpromoRuleEntity"/>
+    </message>
+    <message name="giftpromoRuleCreateResponse">
+        <part name="result" type="xsd:int"/>
+    </message>
+    <portType>
+        <operation name="giftpromoRuleCreate">
+            <documentation>Create Promotional Rule</documentation>
+            <input message="typens:giftpromoRuleCreateRequest"/>
+            <output message="typens:giftpromoRuleCreateResponse"/>
+        </operation>
+    </portType>
+    <message name="giftpromoRuleUpdateRequest">
+        <part name="sessionId" type="xsd:string"/>
+        <part name="filterData" type="xsd:string"/>
+        <part name="ruleData" type="typens:giftpromoRuleEntity"/>
+    </message>
+    <message name="giftpromoRuleUpdateResponse">
+        <part name="result" type="xsd:boolean"/>
+    </message>
+    <portType>
+        <operation name="giftpromoRuleUpdate">
+            <documentation>Update Promotional Rule</documentation>
+            <input message="typens:giftpromoRuleUpdateRequest"/>
+            <output message="typens:giftpromoRuleUpdateResponse"/>
+        </operation>
+    </portType>
+    <message name="giftpromoRuleListRequest">
+        <part name="sessionId" type="xsd:string"/>
+        <part name="rule_id" type="xsd:int" minOccurs="0"/>
+        <part name="website_id" type="xsd:int" minOccurs="0"/>
+    </message>
+    <message name="giftpromoRuleListResponse">
+        <part name="storeView" type="typens:giftpromoRuleEntityArray"/>
+    </message>
+    <portType>
+        <operation name="giftpromoRuleList">
+            <documentation>List Promotional Rules</documentation>
+            <input message="typens:giftpromoRuleListRequest"/>
+            <output message="typens:giftpromoRuleListResponse"/>
+        </operation>
+    </portType>
+    <message name="giftpromoRuleRemoveRequest">
+        <part name="sessionId" type="xsd:string"/>
+        <part name="ruleId" type="xsd:int" minOccurs="0"/>
+    </message>
+    <message name="giftpromoRuleRemoveResponse">
+        <part name="result" type="xsd:boolean"/>
+    </message>
+    <portType>
+        <operation name="giftpromoRuleRemove">
+            <documentation>Remove Promotional Rule</documentation>
+            <input message="typens:giftpromoRuleRemoveRequest"/>
+            <output message="typens:giftpromoRuleRemoveResponse"/>
+        </operation>
+    </portType>
+    <binding name="{{var wsdl.handler}}Binding" type="typens:{{var wsdl.handler}}PortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="giftpromoRuleCreate">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="giftpromoRuleUpdate">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="giftpromoRuleList">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="giftpromoRuleRemove">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+    </binding>
+    <service name="{{var wsdl.name}}Service">
+        <port name="{{var wsdl.handler}}Port" binding="typens:{{var wsdl.handler}}Binding">
+            <soap:address location="{{var wsdl.url}}"/>
+        </port>
+    </service>
+</definitions>

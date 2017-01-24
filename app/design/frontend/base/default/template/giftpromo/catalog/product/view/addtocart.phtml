@@ -1,0 +1,15 @@
+<?php $_product = $this->getProduct(); ?>
+<?php $buttonTitle = $this->__('Add to Cart'); ?>
+<?php if ($_product->isSaleable()): ?>
+    <div style="border: none; padding: 0; margin: 0;" class="add-to-cart">
+        <div class="add-to-cart-buttons">
+            <button style="float:left;" type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart"
+                    onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span>
+            </button>
+            <button style="float:right; background: #CC3348;" type="button" title="<?php echo $this->__('Cancel'); ?>"
+                    class="button btn-cart btn-cancel"
+                    onclick="document.location = '<?php echo $this->helper('checkout/cart')->getCartUrl(); ?>'">
+                <span><span><?php echo $this->__('Cancel'); ?></span></span></button>
+        </div>
+    </div>
+<?php endif; ?>

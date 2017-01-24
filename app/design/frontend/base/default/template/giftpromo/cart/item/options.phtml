@@ -1,0 +1,10 @@
+<?php if ($_options = $this->getOptionList()): ?>
+        <?php foreach ($_options as $_option) : ?>
+            <?php $_formatedOptionValue = $this->getFormatedOptionValue($_option) ?>
+            <?php echo $this->htmlEscape($_option['label']) ?> -> <?php echo $_formatedOptionValue['value'] ?>
+            <?php if(count($_options) > 1): 
+                $this->setMultiple(true);
+                ?>,
+           <?php endif; ?>
+        <?php endforeach; ?>    
+<?php endif; ?>

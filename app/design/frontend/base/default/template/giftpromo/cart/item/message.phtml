@@ -1,0 +1,5 @@
+<?php if ($this->getMessage()): ?>
+    <a href='<?php echo $this->getUpgradeUrl(); ?>'
+       class='gift-notice-message gift-notice-message-<?php echo $this->getItem()->getId(
+       ); ?>'><?php echo $this->getMessage(); ?> </a>
+<?php endif; ?>

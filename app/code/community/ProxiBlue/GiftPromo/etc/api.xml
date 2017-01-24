@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<config>
+    <api>
+        <resources>
+            <giftpromo_rule translate="title" module="giftpromo">
+                <model>giftpromo/promo_api</model>
+                <title>Promotion Rules API</title>
+                <acl>giftpromo_rule</acl>
+                <methods>
+                    <create translate="title" module="giftpromo">
+                        <title>Create a new promotion rule</title>
+                        <method>addPromotionRule</method>
+                    </create>
+                    <update translate="title" module="giftpromo">
+                        <title>Update existing promotion rule</title>
+                        <method>updatePromotionRule</method>
+                    </update>
+                    <list translate="title" module="giftpromo">
+                        <title>List existing promotion rules</title>
+                        <method>listPromotionRules</method>
+                    </list>
+                    <remove translate="title" module="giftpromo">
+                        <title>Remove existing promotion rule</title>
+                        <method>removePromotionRule</method>
+                    </remove>
+                </methods>
+            </giftpromo_rule>
+        </resources>
+        <resources_alias>
+            <giftpromo_rule>giftpromo_rule</giftpromo_rule>
+        </resources_alias>
+        <v2>
+            <resources_function_prefix>
+                <giftpromo_rule>giftpromoRule</giftpromo_rule>
+            </resources_function_prefix>
+        </v2>
+        <acl>
+            <resources>
+                <giftpromo_rule translate="title" module="giftpromo">
+                    <title>Promotional Rule</title>
+                    <sort_order>5</sort_order>
+                </giftpromo_rule>
+            </resources>
+        </acl>
+    </api>
+</config>

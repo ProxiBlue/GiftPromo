@@ -1,0 +1,58 @@
+<?php
+$rulesCollection = Mage::getModel('giftpromo/promo_rule')->getCollection()->addFieldToFilter(
+    'allow_gift_from_category', array('notnull' => true)
+);
+if (count($rulesCollection->getItems()) > 0) {
+    $cart = Mage::getModel('checkout/cart');
+// cannot save here, it causes new quote row entries to be created in the sales_flat_quote table.
+//$cart->getQuote()->save();
+    foreach ($rulesCollection as $ruleObject) {
+        $validTest = $ruleObject->validate($cart->getQuote());
+        if ($validTest && $category = $ruleObject->getGiftFromCategory()) {
+            // do we have such a product from such a category in the cart?
+            // and is it a gift already?
+            $giftsInCart = Mage::helper('giftpromo')->getAllGiftBasedCartItems();
+            foreach ($giftsInCart as $cartGiftItem) {
+                $productCats = $cartGiftItem->getProduct()->getCategoryIds();
+                if (in_array($category->getId(), $productCats)) {
+                    break 2;
+                }
+            }
+            $collection = $this->_getCollection();
+            $collection->addFieldToFilter('main_table.banner_id', $ruleObject->getBannerGiftsFromCategory());
+            $_item = $collection->getFirstItem();
+            $random = rand(0, 100000);
+            $_imageList = $_item->getImageList();
+            if (is_array($_imageList) and count($_imageList) > 0) {
+                ?>
+                <div class="banner-container" style="padding-bottom: 15px;">
+                    <ul class="light-slider light-slider-<?php echo $_item->getBannerRuleId(); ?>"
+                        id="light-slider-<?php echo $_item->getBannerId(); ?>-<?php echo $random; ?>">
+                        <?php foreach ($_imageList as $_itemImage) : ?>
+                            <li>
+                                <?php if (strpos($_itemImage['label'], "gen:") !== false): ?>
+                                    <?php $parts = explode(':', $_itemImage['label']); ?>
+                                    <a href="<?php echo $_itemImage['label']; ?>"><img class="img-responsive"
+                                                                                       src="http://placehold.it/<?php echo $parts[1]; ?>x<?php echo $parts[2]; ?>"
+                                                                                       alt=""/></a>
+                                <?php else: ?>
+                                    <a href="<?php echo $_itemImage['label']; ?>"><img
+                                            src="<?php echo $this->helper('giftpromo/image')->init(
+                                                $_itemImage['file']
+                                            ); ?>"
+                                            alt="" class="img-responsive"/></a>
+                                <?php endif; ?>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                <?php
+            }
+        }
+    }
+}
+?>
+
+
+
+

@@ -1,0 +1,240 @@
+<?php $enableMultiSelectAddButton = false; ?>
+<?php if ($this->getItems()->getSize()): ?>
+    <?php foreach ($this->getItems() as $giftItemKey => $_object): ?>
+        <?php if ($this->canDisplay($_object, $giftItemKey) && $_object->getItems()->getSize()): ?>
+            <?php $_giftItems = $this->filterItems($_object); ?>
+            <?php if (count($_giftItems) > 0): ?>
+                <div style="clear: both;">&nbsp;</div>
+                <div class="giftselect">
+                    <?php echo $this->getSelectGiftMessage($_object); ?>
+                    <div class="giftselect-products-list">
+                        <?php foreach ($_giftItems as $itemKey => $_item): ?>
+                            <?php $_item = $this->addUniqueId($_item); ?>
+                            <?php $_item->setGiftItemKey($giftItemKey); ?>
+                            <?php mage::register('current_gift_item_key', $giftItemKey, true); ?>
+                            <div class="item gift-select-item <?php echo $_item->getGiftUid(
+                            ); ?>_<?php echo $giftItemKey; ?>_<?php echo $_item->getId(); ?>">
+
+                                <?php
+                                if((bool) Mage::getStoreConfig('giftpromo/cart/selectitems_nolink_notvis') == false
+                                    || $_item->getVisibility() != Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE): ?>
+                                <a class="product-image"
+                                   href="<?php echo $_item->getProductUrl(); ?>"
+                                   title="<?php echo $this->htmlEscape(
+                                       $_item->getName()
+                                   ) ?>"><img
+                                        src="<?php echo $this->getProductThumbnail(
+                                            $_item
+                                        )->resize(100); ?>"
+                                        alt="<?php echo $this->escapeHtml(
+                                            $_item->getName()
+                                        ) ?>"/></a>
+                                    <h3 class="product-name"><a
+                                            href="<?php echo $_item->getProductUrl() ?>"><?php echo $this->htmlEscape(
+                                                $_item->getName()
+                                            ) ?></a></h3>
+                                <?php
+                                    else:
+                                 ?>
+                                        <img
+                                            src="<?php echo $this->getProductThumbnail(
+                                                $_item
+                                            )->resize(100); ?>"
+                                            alt="<?php echo $this->escapeHtml(
+                                                $_item->getName()
+                                            ) ?>"/>
+                                        <h3 class="product-name"><?php echo $this->htmlEscape($_item->getName()) ?></h3>
+                                 <?php
+                                    endif;
+                                 ?>
+                                <?php echo $this->getPriceHtml(
+                                    $_item, false
+                                ) ?>
+                                <?php if ($_item->isSaleable()): ?>
+                                    <?php if ($this->hasOptions($_item)): ?>
+
+                                    <script type="text/javascript">
+                                        var optionsPrice = new Product.OptionsPrice([]);
+                                    </script>
+                                <?php echo $this->getOptionsHtml($_item); ?>
+                                <?php endif; ?>
+                                <?php if (!$this->isCurrentSelected($giftItemKey . '_' . $_item->getId())): ?>
+                                    <?php if ($_item->canUseSelectListCheckbox() && $_object->getAllowGiftSelectionCount() > 1): ?>
+                                        <?php $enableMultiSelectAddButton = true; ?>
+                                        <input id="<?php echo $_item->getGiftUid(
+                                        ); ?>_<?php echo $giftItemKey; ?>_<?php echo $_item->getId(); ?>"
+                                            type="checkbox"
+                                            name="giftselect-multiple"
+                                            class="giftselect-chk-cart chk-cart giftselect-chk-<?php echo $_object->getId(); ?> giftselect-chk-<?php echo $_item->getGiftRuleId(
+                                        ); ?>"
+                                            data-total-selectable="<?php echo $_object->getAllowGiftSelectionCount() ?>"
+                                            data-url="<?php echo $this->getAddToCartUrl($_item) ?>"
+                                            data-itemid="<?php echo $_item->getId(); ?>"
+                                                                data-giftruleid="<?php echo $_item->getGiftRuleId(); ?>"
+                                                                data-giftkey="<?php echo $giftItemKey; ?>_<?php echo $_item->getId(); ?>"
+                                                                data-parentid="<?php if (is_object($_item->getGiftParentItem())):
+                                            echo $_item->getGiftParentItem()->getId();
+                                        else: echo ""; endif; ?>">
+                                        </input>
+                                        <?php else: ?>
+                                            <button id="<?php echo $_item->getGiftUid(
+                                            ); ?>_<?php echo $giftItemKey; ?>_<?php echo $_item->getId(); ?>"
+                                                    type="button"
+                                                    title="<?php $this->__('Add to Cart') ?>"
+                                                    class="giftselect-btn-cart button btn-cart"
+                                                    data-url="<?php echo $this->getAddToCartUrl($_item) ?>"
+                                                    data-type="<?php echo $_item->getTypeId() ?>"
+                                                    data-itemid="<?php echo $_item->getId(); ?>"
+                                                    data-giftruleid="<?php echo $_item->getGiftRuleId(); ?>"
+                                                    data-giftkey="<?php echo $giftItemKey; ?>_<?php echo $_item->getId(); ?>"
+                                                    data-parentid="<?php if (is_object($_item->getGiftParentItem())):
+                                                        echo $_item->getGiftParentItem()->getId();
+                                                    else: echo ""; endif; ?>"
+                                                    data-qty-override="<?php if (mage::registry('qty_override')):
+                                                    echo mage::registry('qty_override');
+                                                else: echo ""; endif; ?>">
+                                               <span><span><?php echo $this->__('Add to Cart') ?></span></span>
+                                            </button>
+                                    <?php endif; ?>
+                                <?php else: ?>
+                                    <div
+                                        class="selected-gift"><?php echo $this->__(
+                                            'Selected Item'
+                                        ); ?></div>
+                                    <?php if ($_object->getGiftAddProductMulti() && $this->canDisplay($_object, $giftItemKey)): ?>
+                                            <button id="<?php echo $_item->getGiftUid(
+                                            ); ?>_<?php echo $giftItemKey; ?>_<?php echo $_item->getId(); ?>"
+                                                    type="button"
+                                                    title="<?php $this->__('Add to Cart') ?>"
+                                                    class="giftselect-btn-cart button btn-cart"
+                                                    data-url="<?php echo $this->getAddToCartUrl($_item) ?>"
+                                                    data-type="<?php echo $_item->getTypeId() ?>"
+                                                    data-itemid="<?php echo $_item->getId(); ?>"
+                                                    data-giftruleid="<?php echo $_item->getGiftRuleId(); ?>"
+                                                    data-giftkey="<?php echo $giftItemKey; ?>_<?php echo $_item->getId(); ?>"
+                                                    data-parentid="<?php if (is_object($_item->getGiftParentItem())):
+                                                        echo $_item->getGiftParentItem()->getId();
+                                                    else: echo ""; endif; ?>"
+                                                    data-qty-override="<?php if (mage::registry('qty_override')):
+                                                    echo mage::registry('qty_override');
+                                                else: echo ""; endif; ?>">
+                                               <span><span><?php echo $this->__('Add to Cart') ?></span></span>
+                                            </button>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                                <?php else: ?>
+                                    <p class="availability out-of-stock">
+                                                <span><?php echo $this->__(
+                                                        'Out of stock'
+                                                    ) ?></span></p>
+                                <?php endif; ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                    <?php if ($enableMultiSelectAddButton && $_object->getAllowGiftSelectionCount() > 1): ?>
+                        <button id="multi-add-gift-<?php echo $_object->getId(); ?>"
+                                type="button"
+                                title="<?php $this->__('Add Selected Gifts To Cart') ?>"
+                                class="giftselect-multi-btn-cart button btn-cart"
+                                data-url="<?php echo $this->getAddToCartUrl($_item) ?>"
+                                data-giftruleid="<?php echo $_object->getRuleId(); ?>"
+                            >
+                            <span><span><?php echo $this->__('Add Selected Gifts To Cart') ?></span></span>
+                        </button>
+                        <script>
+                            document.observe('dom:loaded', function () {
+                                $$('.giftselect-chk-<?php echo $_object->getId(); ?>').each(function (element) {
+                                    element.observe('click', function () {
+                                        var totalChecked = 0;
+                                        // get the giftid for this checkbox
+                                        var gift_rule_id = element.getAttribute('data-giftruleid');
+                                        // get all chkboxes of this rule
+                                        $$('.giftselect-chk-' + gift_rule_id).each(function (chkbox) {
+                                            if (chkbox.checked) {
+                                                totalChecked++;
+                                            }
+                                        });
+                                        $$('.selected-gift').each(function (selected) {
+                                            totalChecked++;
+                                        });
+                                        if (totalChecked >= <?php echo $_object->getAllowGiftSelectionCount(); ?>) {
+                                            $$('.giftselect-chk-' + gift_rule_id).each(function (chkboxdisable) {
+                                                if (chkboxdisable.checked == false) {
+                                                    chkboxdisable.disable();
+                                                }
+                                            });
+                                        } else {
+                                            $$('.giftselect-chk-' + gift_rule_id).each(function (chkboxdisable) {
+                                                if (chkboxdisable.checked == false) {
+                                                    chkboxdisable.enable();
+                                                }
+                                            });
+                                        }
+
+                                    });
+                                });
+                            });
+                        </script>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
+    <?php endforeach; ?>
+    <div class="giftselect-validation-notice" id="giftselect-validation-notice" style="display:none;">
+        <h2><?php echo $this->__('Gift Selection Failed'); ?></h2>
+
+        <p>Sorry, your gift could not add.</p>
+
+        <p>Please confirm all the options were selected</p>
+        <br/>
+        <button class="button">Close</button>
+    </div>
+    <div class="giftselect-progress" id="giftselect-progress" style="display:none;">
+        <h2><?php echo $this->__('Please Wait'); ?></h2>
+        <br/>
+        <img src="<?php echo $this->getSkinUrl('images/giftpromo/progress.gif') ?>" title="" alt=""/>
+    </div>
+<?php endif; ?>
+<script>
+    document.observe('dom:loaded', function () {
+        $$('.giftselect-btn-cart').each(function (element) {
+            element.observe('click', function () {
+                if (this.getAttribute('data-type') == 'gift-bundle') {
+                    this.disable(true);
+                    document.location = this.getAttribute('data-url');
+                } else {
+                    var giftAddToCartForm = new giftSelect(this.id,
+                        this.getAttribute('data-url'),
+                        this.getAttribute('data-itemid'),
+                        this.getAttribute('data-giftruleid'),
+                        this.getAttribute('data-giftkey'),
+                        this.getAttribute('data-parentid'),
+                        this.getAttribute('data-qty-override'));
+                    giftAddToCartForm.submit();
+                }
+                return false;
+            });
+        })
+        $$('.giftselect-multi-btn-cart').each(function (element) {
+            element.observe('click', function () {
+                var giftAddToCartForm = new multiGiftSelect(this.id,
+                    this.getAttribute('data-url'),
+                    this.getAttribute('data-giftruleid'));
+                giftAddToCartForm.submit();
+                return false;
+            });
+        })
+    });
+    <?php if(mage::getStoreConfig('giftpromo/cart/selectitems_bestfit')): ?>
+    (function ($) {
+        $(document).ready(function () {
+            var $grid = $('.giftselect-products-list').masonry({
+                itemSelector: '.item'
+            });
+            $grid.imagesLoaded().progress(function () {
+                $grid.masonry('layout');
+            });
+        });
+    })(jQuery);
+    <?php endif; ?>
+</script>

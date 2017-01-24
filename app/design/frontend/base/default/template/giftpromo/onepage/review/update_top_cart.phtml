@@ -1,0 +1,24 @@
+<script>
+    document.observe("dom:loaded", function () {
+        var request = new Ajax.Request(
+            '<?php echo Mage::getUrl("giftpromo/cart/getTopCartQty",
+            array(
+                '_secure' => Mage::app()->getStore()->isCurrentlySecure(),
+                '_store' => Mage::app()->getStore()->getId()
+                )) ?>',
+            {
+                method: 'get',
+                onSuccess: function (response) {
+                    var json = response.responseText.evalJSON();
+                    var cartElm = $$('.top-link-cart')[0];
+                    if (cartElm) {
+                        var updatedTopCart = cartElm.innerHTML.replace(/(\d+)/g,
+                            json.content);
+                        cartElm.innerHTML = updatedTopCart;
+                        cartElm.title = updatedTopCart;
+                    }
+                }
+            }
+        );
+    });
+</script>    

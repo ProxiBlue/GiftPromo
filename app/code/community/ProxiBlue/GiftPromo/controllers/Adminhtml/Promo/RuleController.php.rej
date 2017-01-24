@@ -1,0 +1,74 @@
+--- app/code/community/ProxiBlue/GiftPromo/controllers/Adminhtml/Promo/RuleController.php
++++ app/code/community/ProxiBlue/GiftPromo/controllers/Adminhtml/Promo/RuleController.php
+@@ -47,6 +47,10 @@ class ProxiBlue_GiftPromo_Adminhtml_Promo_RuleController extends Mage_Adminhtml_
+         }
+ 
+         $data = Mage::getSingleton('adminhtml/session')->getPageData(true);
++        if (isset($data['icon_file'])) {
++            unset($data['icon_file']);
++        }
++
+         if (!empty($data)) {
+             $model->addData($data);
+         }
+@@ -66,7 +70,7 @@ class ProxiBlue_GiftPromo_Adminhtml_Promo_RuleController extends Mage_Adminhtml_
+      */
+     public function saveAction()
+     {
+-        if ($data =  $this->getRequest()->getPost()) {
++        if ($data = $this->getRequest()->getPost()) {
+             try {
+                 /** @var $model Mage_SalesRule_Model_Rule */
+                 $model = Mage::getModel('giftpromo/promo_rule');
+@@ -74,7 +78,7 @@ class ProxiBlue_GiftPromo_Adminhtml_Promo_RuleController extends Mage_Adminhtml_
+                 unset($data['form_key']);
+                 unset($data['rule_id']);
+ 
+-                if(!empty($data['from_date'])) {
++                if (!empty($data['from_date'])) {
+                     $data = $this->_filterDates($data, array('from_date', 'to_date', 'coupon_gen_to'));
+                 }
+ 
+@@ -140,6 +144,42 @@ class ProxiBlue_GiftPromo_Adminhtml_Promo_RuleController extends Mage_Adminhtml_
+                     $data['discount_gifts_from_category'] = 100;
+                 }
+ 
++                if (isset($data['icon_file']) && is_array($data['icon_file'])
++                    && isset($data['icon_file']['delete'])
++                    && $data['icon_file']['delete'] == 1
++                ) {
++                    try {
++                        unlink(Mage::getBaseDir('media') . DS . $data['icon_file']['value']);
++                    } catch (Exception $e) {
++                        Mage::logException($e);
++                    }
++                    $data['icon_file'] = '';
++                }
++
++                if (isset($_FILES['icon_file']['name']) and (file_exists($_FILES['icon_file']['tmp_name']))) {
++                    try {
++                        $uploader = new Varien_File_Uploader('icon_file');
++                        $uploader->setAllowedExtensions(array('jpg', 'jpeg', 'gif', 'png')); // or pdf or anything
++                        $uploader->setAllowRenameFiles(false);
++                        // setAllowRenameFiles(true) -> move your file in a folder the magento way
++                        $uploader->setFilesDispersion(false);
++                        $path = Mage::getBaseDir('media') . DS . 'giftpromo' . DS;
++                        $uploader->save($path, $model->getRuleId() . "_" . $_FILES['icon_file']['name']);
++                        $data['icon_file'] = 'giftpromo' . DS . $uploader->getUploadedFileName();
++                        try {
++                            unlink(Mage::getBaseDir('media') . DS . $model->getIconFile());
++                        } catch (Exception $e) {
++                            Mage::logException($e);
++                        }
++                    } catch (Exception $e) {
++
++                    }
++                }
++
++                if (isset($data['icon_file']) && is_array($data['icon_file'])) {
++                    Mage::log('gift promo icon file hard reset occured');
++                    unset($data['icon_file']);
++                }
+                 unset($data['rule']);
+                 $model->loadPost($data);
+ 

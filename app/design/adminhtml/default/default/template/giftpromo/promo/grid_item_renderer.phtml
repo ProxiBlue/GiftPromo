@@ -1,0 +1,16 @@
+<?php
+$_item = $this->getItem();
+$this->compositeMessage();
+?>
+<div>
+    <div>
+        <img src="<?php echo $this->getProductThumbnail()->resize(75); ?>" width="75" height="75"
+             alt="<?php echo $this->htmlEscape($this->getProductName()) ?>"/><?php if ($this->hasProductUrl(
+        )): ?></a><?php endif; ?>
+    </div>
+    <div>
+        <h2 class="product-name">
+            <?php echo $this->htmlEscape($this->getProductName()) ?>
+        </h2>
+    </div>
+</div>

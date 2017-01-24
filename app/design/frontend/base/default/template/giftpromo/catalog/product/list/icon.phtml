@@ -1,0 +1,19 @@
+<?php if($this->IsEnabled()): ?>
+    <?php if($this->getItems()->getSize()): ?>
+    <div class="gift-icon" id="gift-icon-<?php echo $this->getProduct()->getId(); ?>" onMouseover="$('gift-icon-hover-<?php echo $this->getProduct()->getId(); ?>').show();" onMouseout="$('gift-icon-hover-<?php echo $this->getProduct()->getId(); ?>').hide();">
+        <img src="<?php echo $this->getGiftIcon(70); ?>" title="" alt=""/>
+    </div>
+    <div class="gift-icon-hover" id="gift-icon-hover-<?php echo $this->getProduct()->getId(); ?>" style="display:none">
+            <div class="gift-title">Your gift<?php if($this->getItems()->getSize() > 1):?>s<?php endif;?>:</div>
+            <?php foreach ($this->getItems() as $_item): ?>
+                <div class="gift-item">
+
+                    <img class="gifted-product-image" src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(50); ?>" alt="<?php echo $this->htmlEscape($_item->getName()) ?>" />
+                    <div class="gifted-product-details">
+                        <?php echo $this->htmlEscape($_item->getName()); ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>    
+    </div>
+    <?php endif ?>
+<?php endif ?>

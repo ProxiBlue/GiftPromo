@@ -1,0 +1,64 @@
+<?php
+if (Mage::getStoreConfig('giftpromo/debug/enabled')) :
+?>
+<table cellspacing="0" class="form-list">
+      <colgroup class="label"></colgroup>
+      <colgroup class="value"></colgroup>
+      <colgroup class="scope-label"></colgroup>
+      <colgroup class=""></colgroup>
+      <tbody>
+        <tr id="row_giftpromo_debug_conflicts">
+            <td class="label">
+                <label for="giftpromo_debug_conflicts"> Conflict Checker</label>
+            </td>
+            <td class="value">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Path</th>
+                            <th>ProxiBlue Class</th>
+                            <th>Active Class</th>
+                            <th width="100px">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+<?php
+$i = 1;
+foreach ($this->getCollection() as $item) {
+    $status = $item->getData('status');
+    if((int)$status == 2) {
+        $status = '<span style="color:orangered">HANDLED</span>';
+    } elseif ($status) {
+        $status = '<span style="color:green">OK</span>';
+    } else {
+        $status = '<span style="color:red">NOT OK</span>';
+    }
+
+    echo '<tr>
+        <td>' . $i . '</td>
+        <td>' . $item->getData('path') . '</td>
+        <td>' . $item->getData('rewrite_class') . '</td>
+        <td>' . $item->getData('active_class') . '</td>
+        <td>' . $status . '</td>
+    </tr>';
+    $i++;
+}
+?>
+</tbody></table>
+                <br/><strong>This checker only shows if the ProxiBlue module is not in control of the rewrite. There could still be a conflicts, affecting other modules. Please use a proper conflict checking tool to determine any active conflicts</strong>
+    <br/>
+                <br/><span style="color:red">Any result of <b>NOT OK</b> above may likely cause the extension to not funcion correctly.<br/>
+           You need to resolve the conflicts, as per standard magento conflict resolution methods.<br/><br/>
+           Please note that resolving conflicts may require a support cost.</span>
+      </td>
+            <td class="scope-label"></td>
+            <td class=""></td>
+        </tr>
+      </tbody>
+      </table>
+<?php
+
+endif;
+
+

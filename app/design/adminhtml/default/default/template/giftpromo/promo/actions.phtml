@@ -1,0 +1,202 @@
+<div class="entry-edit">
+    <?php echo $this->getFormHtml(); ?>
+</div>
+<?php echo $this->getChildHtml('form_after'); ?>
+<?php echo $this->getChildHtml('grid'); ?>
+
+<?php
+$block = $this->getLayout()->getBlock('giftpromo_promo_rule_edit_tab_actions_giftpromo_grid');
+$_gridJsObject = $block->getJsObjectName();
+?>
+<script type="text/javascript">
+    //<![CDATA[
+
+    GiftpromoGifts = $H(<?php echo $this->getProductsJson() ?>);
+
+    function registerCategoryGiftProduct(grid, element, checked) {
+        if (element.defaultValue != '') {
+            if (checked) {
+                element.giftedpositionElement.disabled = false;
+                element.giftedpriceElement.disabled = false;
+                element.giftedqtymaxElement.disabled = false;
+                element.rateproductqtyElement.disabled = false;
+                element.rateproductqtyskuElement.disabled = false;
+                element.rategiftrateElement.disabled = false;
+                element.giftedmessageElement.disabled = false;
+                element.giftedlabelElement.disabled = false;
+                GiftpromoGifts = setData(element.value, element);
+            }
+            else {
+
+                element.giftedpositionElement.disabled = true;
+                element.giftedpriceElement.disabled = true;
+                element.giftedqtymaxElement.disabled = true;
+                element.rateproductqtyElement.disabled = true;
+                element.rateproductqtyskuElement.disabled = true;
+                element.rategiftrateElement.disabled = true;
+                element.giftedmessageElement.disabled = true;
+                element.giftedlabelElement.disabled = true;
+                GiftpromoGifts.unset(element.value);
+            }
+        }
+        $('rule_giftpromo').value = GiftpromoGifts.toQueryString();
+        grid.reloadParams = {'selected_giftpromo[]': GiftpromoGifts.keys()};
+    }
+
+    function setData(value, element) {
+        var productData = element.giftedpriceElement.value + '|' + element.giftedmessageElement.value + '|' + element.giftedlabelElement.value + '|' + element.giftedpositionElement.value + '|' + element.giftedqtymaxElement.value + '|' + element.rateproductqtyskuElement.value + ':' + element.rateproductqtyElement.value + ':' + element.rategiftrateElement.value;
+        //console.log(productData);
+        GiftpromoGifts.set(value, productData);
+        $('rule_giftpromo').value = GiftpromoGifts.toQueryString();
+        return GiftpromoGifts;
+    }
+
+    function categoryGiftProductRowClick(grid, event) {
+        var trElement = Event.findElement(event, 'tr');
+        var isInput = Event.element(event).tagName == 'INPUT';
+        if (trElement) {
+            if (Event.element(event).type != 'checkbox') {
+                var checkbox = Element.getElementsBySelector(trElement, 'input');
+                if (checkbox[0] && !checkbox[0].disabled) {
+                    grid.setCheckboxChecked(checkbox[0], true);
+                }
+                return;
+            }
+            var checkbox = Element.getElementsBySelector(trElement, 'input');
+            if (checkbox[0]) {
+                var checked = isInput ? checkbox[0].checked : !checkbox[0].checked;
+                <?php echo $_gridJsObject ?>.
+                setCheckboxChecked(checkbox[0], checked);
+            }
+        }
+    }
+
+    function giftDataChange(event) {
+        var element = Event.element(event);
+        if (element && element.checkboxElement && element.checkboxElement.checked) {
+            setData(element.checkboxElement.value, element.checkboxElement);
+        }
+    }
+
+    var tabIndex = 1000;
+    function categoryGiftProductRowInit(grid, row) {
+        var checkbox = $(row).getElementsByClassName('checkbox')[0];
+        var giftedlabel = $(row).getElementsByClassName('input-gifted-label')[0];
+        var giftedmessage = $(row).getElementsByClassName('input-gifted-message')[0];
+        var giftedprice = $(row).getElementsByClassName('input-gifted-price')[0];
+        var rateproductqty = $(row).getElementsByClassName('input-gifted-product-qty')[0];
+        var rateproductqtysku = $(row).getElementsByClassName('input-gifted-product-qty-sku')[0];
+        var rategiftrate = $(row).getElementsByClassName('input-gifted-qty-rate')[0];
+        var giftedqtymax = $(row).getElementsByClassName('input-gifted-max')[0];
+        var giftedposition = $(row).select('.input-text[name=gifted_position]')[0];
+
+        if (checkbox) {
+            checkbox.giftedpositionElement = giftedposition;
+            checkbox.giftedpriceElement = giftedprice;
+            checkbox.giftedqtymaxElement = giftedqtymax;
+            checkbox.giftedmessageElement = giftedmessage;
+            checkbox.giftedlabelElement = giftedlabel;
+            checkbox.rateproductqtyElement = rateproductqty;
+            checkbox.rateproductqtyskuElement = rateproductqtysku;
+            checkbox.rategiftrateElement = rategiftrate;
+
+            giftedposition.checkboxElement = checkbox;
+            giftedprice.checkboxElement = checkbox;
+            giftedqtymax.checkboxElement = checkbox;
+            rateproductqty.checkboxElement = checkbox;
+            rateproductqtysku.checkboxElement = checkbox;
+            giftedmessage.checkboxElement = checkbox;
+            giftedlabel.checkboxElement = checkbox;
+            rategiftrate.checkboxElement = checkbox;
+
+            giftedposition.disabled = !checkbox.checked;
+            giftedprice.disabled = !checkbox.checked;
+            giftedqtymax.disabled = !checkbox.checked;
+            rateproductqty.disabled = !checkbox.checked;
+            rateproductqtysku.disabled = !checkbox.checked;
+            giftedmessage.disabled = !checkbox.checked;
+            giftedlabel.disabled = !checkbox.checked;
+            rategiftrate.disabled = !checkbox.checked;
+
+            giftedlabel.tabIndex = tabIndex++;
+            giftedmessage.tabIndex = tabIndex++;
+            giftedprice.tabIndex = tabIndex++;
+            rateproductqty.tabIndex = tabIndex++;
+            rateproductqtysku.tabIndex = tabIndex++;
+            rategiftrate.tabIndex = tabIndex++;
+            giftedqtymax.tabIndex = tabIndex++;
+            giftedposition.tabIndex = tabIndex++;
+
+            Event.observe(giftedposition, 'keyup', giftDataChange);
+            Event.observe(giftedprice, 'keyup', giftDataChange);
+            Event.observe(giftedqtymax, 'keyup', giftDataChange);
+            Event.observe(rateproductqty, 'keyup', giftDataChange);
+            Event.observe(rateproductqtysku, 'keyup', giftDataChange);
+            Event.observe(giftedmessage, 'keyup', giftDataChange);
+            Event.observe(giftedlabel, 'keyup', giftDataChange);
+            Event.observe(rategiftrate, 'keyup', giftDataChange);
+        }
+
+        if ($('rule_gift_added_product').checked) {
+            $('rule_gift_added_product_max').up(1).show()
+        } else {
+            $('rule_gift_added_product_max').up(1).hide();
+        }
+    }
+
+    <?php echo $_gridJsObject ?>.rowClickCallback = categoryGiftProductRowClick;
+    <?php echo $_gridJsObject ?>.initRowCallback = categoryGiftProductRowInit;
+    <?php echo $_gridJsObject ?>.checkboxCheckCallback = registerCategoryGiftProduct;
+    <?php echo $_gridJsObject ?>.rows.each(function (row) {
+        categoryGiftProductRowInit(<?php echo $_gridJsObject ?>, row)
+    });
+
+    function handleGiftAddedProductClick(elm) {
+        if (elm.checked) {
+            $('rule_gift_added_product_max').up(1).show()
+        } else {
+            $('rule_gift_added_product_max').up(1).hide();
+        }
+        return elm.checked ? 1 : 0;
+    }
+
+    function handleGiftProductTypeClick(elm) {
+        return elm.checked ? 1 : 0;
+    }
+
+    function handleCouponGenClick(elm) {
+        if (elm.checked) {
+            $('rule_generate_coupon').up(1).show()
+        } else {
+            $('rule_generate_coupon').up(1).hide();
+            $('rule_generate_coupon').selectedIndex = 0;
+
+        }
+        handleGenerateOption($('rule_generate_coupon'));
+        return elm.checked ? 1 : 0;
+    }
+
+    function handleGenerateOption(elm) {
+        if(elm.options[elm.selectedIndex].value > 0) {
+            $('rule_coupon_gen_to').up(1).show();
+            $('rule_coupon_email_code').up(1).show();
+            $('rule_coupon_prefix').up(1).show();
+            $('rule_coupon_suffix').up(1).show();
+            $('rule_coupon_length').up(1).show();
+            $('rule_coupon_format').up(1).show();
+        } else {
+            $('rule_coupon_gen_to').up(1).hide();
+            $('rule_coupon_email_code').up(1).hide();
+            $('rule_coupon_prefix').up(1).hide();
+            $('rule_coupon_suffix').up(1).hide();
+            $('rule_coupon_length').up(1).hide();
+            $('rule_coupon_format').up(1).hide();
+        }
+    }
+
+    document.observe("dom:loaded", handleCouponGenClick($('rule_use_auto_generation')));
+
+
+    //]]>
+</script>
+

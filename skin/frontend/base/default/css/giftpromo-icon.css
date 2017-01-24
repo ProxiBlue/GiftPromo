@@ -1,0 +1,35 @@
+.products-grid .item .gift-icon {
+    position: absolute;
+    right: 0px;
+    z-index: 99;
+    cursor: help;
+}
+
+.products-grid .gift-icon-hover {
+    position: absolute;
+    z-index: 100;
+    padding: 10px;
+    background: #fafaec;
+    top: 48px;
+    border: 1px solid black;
+    left: 3px;
+    margin-right: 3px;
+}
+
+.products-grid .gift-icon-hover .gift-item .gifted-product-image {
+    float: left;
+}
+
+.products-grid .gift-icon-hover .gift-item .gifted-product-details {
+    font-size: 9px;
+    float: right;
+    width: 56%;
+}
+
+.products-grid .item {
+    position: relative;
+}
+
+.products-grid .gift-item {
+    clear: both;
+}

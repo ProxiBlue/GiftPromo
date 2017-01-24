@@ -1,0 +1,219 @@
+/** excuse the bad css. Not my best work **/
+.giftselect,
+.review .totals .giftselect {
+    border: 1px solid #cec3b6;
+    background: #fafaec;
+    padding: 12px 15px;
+    display: inline-block;
+    padding-bottom: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+
+.giftselect h2,
+.review .totals .giftselect h2 {
+    font-size: 13px;
+    font-weight: bold;
+    color: #D12C01;
+}
+
+.giftselect p,
+.review .totals .giftselect p {
+    line-height: 1.1;
+}
+
+.giftselect .product-image,
+.review .totals .giftselect .product-image {
+    display: block;
+    margin-right: 11px;
+    margin-left: 11px;
+}
+
+.giftselect .price-box .msrp-price,
+.review .totals .giftselect .price-box .msrp-price.price-box .msrp-price {
+    display: none;
+}
+
+.giftselect .item .price-box,
+.review .totals .giftselect .item .price-box {
+    clear: both;
+}
+
+.giftselect .product-name,
+.review .totals .giftselect .product-name {
+    font-weight: bold;
+    padding-bottom: 10px;
+    min-height: 32px;
+    text-align: center;
+    float: none;
+    clear: both;
+}
+
+.giftselect .giftselect-products-list .item,
+.review .totals .giftselect .giftselect-products-list .item {
+    display: inline-table !important;
+    width: 166px;
+    text-align: center;
+    margin-top: 10px;
+    border: 1px solid rgb(196, 192, 192);
+    padding: 5px;
+    background: white;
+    margin-right: 5px;
+    min-height: 243px;
+    margin-bottom: 10px;
+}
+
+.giftselect .giftselect-products-list .item button,
+.review .totals .giftselect .giftselect-products-list .item button {
+    clear: both;
+    float: none !important;
+    margin-top: 5px;
+}
+
+.giftselect .link-compare,
+.review .totals .giftselect .link-compare {
+    font-weight: normal;
+}
+
+.giftselect .giftselect-products-list,
+.review .totals .giftselect .giftselect-products-list {
+    float: left;
+    width: 100%;
+}
+
+.cart .crosssell li.item:after,
+.shopping-cart .crosssell li.item:after {
+    display: block;
+    content: ".";
+    clear: both;
+    font-size: 0;
+    line-height: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.cart .title-buttons .checkout-types li,
+.shopping-cart .title-buttons .checkout-types li {
+    float: none;
+}
+
+.giftselect .product-options,
+.review .totals .giftselect .product-options {
+    padding: 0px;
+    clear: both;
+    margin: 0px;
+}
+
+.giftselect dt,
+.review .totals .giftselect .product-options dt {
+    padding: 0px;
+    width: 100%;
+}
+
+.giftselect .product-options dt label,
+.review .totals .giftselect .product-options dt label {
+    clear: both;
+    float: left;
+}
+
+.giftselect .product-options dd,
+.review .totals .giftselect .product-options dd {
+    margin: 0px;
+    border-bottom: none;
+}
+
+.giftselect .product-options dd select,
+.review .totals .giftselect .product-options dd select {
+    width: 100%;
+}
+
+
+.giftselect .product-options dl,
+.review .totals .giftselect .product-options dl {
+    margin: 5px;
+}
+
+.giftselect .product-options p.required,
+.review .totals .giftselect .product-options p.required {
+    position: relative;
+    top: 0px;
+    font-size: 80%;
+}
+
+.giftselect .product-options .minimal-price-link,
+.review .totals .giftselect .product-options .minimal-price-link {
+    display: none;
+}
+
+#downloadable-links-list {
+    width: 150px;
+    clear: both;
+    float: none;
+}
+
+#downloadable-links-list span {
+    float: left;
+}
+
+#downloadable-links-list .required {
+    display: none;
+}
+
+.giftselect .required,
+.review .totals .giftselect .required {
+    clear: both;
+}
+
+.giftselect .super-attribute-select,
+.review .totals .giftselect .super-attribute-select {
+    border: 1px solid silver;
+}
+
+.giftselect .input-box,
+.review .totals .giftselect .input-box {
+    padding: 0px;
+}
+
+.giftselect img,
+.review .totals .giftselect img {
+    display: inline;
+}
+
+.giftselect .validation-failed,
+.review .totals .giftselect .validation-failed {
+    border-color: #df280a !important;
+}
+
+.giftselect-validation-notice, .giftselect-progress {
+    z-index: 100;
+    width: 500px;
+    height: 200px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -100px;
+    margin-top: -100px;
+    background: white;
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+    -webkit-box-shadow: 2px 4px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px 4px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 2px 4px 5px 0px rgba(0, 0, 0, 0.75);
+    padding-top: 36px;
+}
+
+.giftselect-progress {
+    width:230px;
+}
+
+.giftselect-progress img {
+    margin: auto;
+}
+
+.giftselect .giftselect-btn-multi-cart {
+    margin-top: 10px !important;
+    background: green !important;
+}

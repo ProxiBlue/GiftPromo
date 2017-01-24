@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <promo>
+            <children>
+                <giftpromo translate="title" module="giftpromo">
+                    <title>Gift Promotions</title>
+                    <action>adminhtml/promo_rule</action>
+                    <sort_order>1000</sort_order>
+                    <depends>
+                        <module>Mage_Sales</module>
+                    </depends>
+                </giftpromo>
+            </children>
+        </promo>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <promo>
+                        <children>
+                            <giftpromo translate="title" module="giftpromo">
+                                <title>Gift Promotions</title>
+                            </giftpromo>
+                        </children>
+                    </promo>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <giftpromo translate="title" module="giftpromo">
+                                        <title>Gift Promotions</title>
+                                    </giftpromo>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

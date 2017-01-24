@@ -1,0 +1,79 @@
+<?php $_block = $this; ?>
+<div id="<?php echo $_block->getHtmlId() ?>" >
+    <div class="grid">
+        <table cellspacing="0" class="data border" id="<?php echo $_block->getHtmlId() ?>_grid_giftpromo" width="100%">
+            <col width="120" />
+            <col />
+            <col width="60" />
+            <?php foreach ($_block->getImageTypes() as $typeId=>$type): ?>
+            <?php endforeach; ?>
+            <col width="50" />
+            <col width="50" />
+            <thead>
+                <tr class="headings">
+                    <th><?php echo Mage::helper('giftpromo')->__('Image') ?></th>
+                    <th><?php echo Mage::helper('giftpromo')->__('Image Link') ?></th>
+                    <th><?php echo Mage::helper('giftpromo')->__('Sort Order') ?></th>
+                    <?php foreach ($_block->getImageTypes() as $typeId=>$type): ?>
+                    <?php endforeach; ?>
+                    <th><?php echo Mage::helper('giftpromo')->__('Disable') ?></th>
+                    <th class="last"><?php echo Mage::helper('giftpromo')->__('Remove') ?></th>
+                </tr>
+            </thead>
+            <tbody id="<?php echo $_block->getHtmlId() ?>_list">
+                <tr id="<?php echo $_block->getHtmlId() ?>_template" class="template no-display">
+                    <td class="cell-image"><div class="place-holder" onmouseover="<?php echo $_block->getJsObjectName(); ?>.loadImage('__file__')"><span><?php echo Mage::helper('giftpromo')->__('Roll Over for preview') ?></span></div><img src="<?php echo $this->getSkinUrl('images/spacer.gif')?>" width="100" style="display:none;" alt="" /></td>
+                    <td class="cell-label"><input type="text" class="input-text" onkeyup="<?php echo $_block->getJsObjectName(); ?>.updateImage('__file__')" onchange="<?php echo $_block->getJsObjectName(); ?>.updateImage('__file__')" /></td>
+                    <td class="cell-position"><input type="text" class="input-text validate-number" onkeyup="<?php echo $_block->getJsObjectName(); ?>.updateImage('__file__')" onchange="<?php echo $_block->getJsObjectName(); ?>.updateImage('__file__')" /></td>
+                    <?php foreach ($_block->getImageTypes() as $typeId=>$type): ?>
+                    <td class="cell-<?php echo $typeId ?> a-center" style="display:none;">
+                        <input type="hidden" name="<?php echo $type['field'] ?>" onclick="<?php echo $_block->getJsObjectName(); ?>.setProductImages('__file__')" value="__file__" /></td>
+                    <?php endforeach; ?>
+                    <td class="cell-disable a-center"><input type="checkbox" onclick="<?php echo $_block->getJsObjectName(); ?>.updateImage('__file__')" /></td>
+                    <td class="cell-remove a-center last"><input type="checkbox" onclick="<?php echo $_block->getJsObjectName(); ?>.updateImage('__file__')" /></td>
+                </tr>
+
+                <tr id="<?php echo $_block->getHtmlId() ?>-image-0">
+                    <td class="cell-image"><?php echo Mage::helper('catalog')->__('No image') ?></td>
+                    <td class="cell-label"><input type="hidden" />&nbsp;</td>
+                    <td class="cell-position"><input type="hidden" />&nbsp;</td>
+                    <?php foreach ($_block->getImageTypes() as $typeId=>$type): ?>
+                    <td class="cell-<?php echo $typeId ?> a-center" style="display:none;">
+                        <input type="hidden" disabled="disabled" name="<?php echo $type['field'] ?>" onclick="<?php echo $_block->getJsObjectName(); ?>.setProductImages('no_selection')" value="no_selection" /></td>
+                    <?php endforeach; ?>                    
+                    <td class="cell-disable"><input type="hidden" />&nbsp;</td>
+                    <td class="cell-remove"><input type="hidden" />&nbsp;</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="100" class="last" style="padding:8px">
+                        <?php echo $_block->getUploaderHtml() ?>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<input type="hidden" id="<?php echo $_block->getHtmlId() ?>_save" name="images" value="<?php echo $_block->htmlEscape($_block->getImagesJson()) ?>" />
+<input type="hidden" id="smece_save" name="[smece]" value="smece" />
+<input type="hidden" id="<?php echo $_block->getHtmlId() ?>_save_image" name="[values]" value="<?php echo $_block->htmlEscape($_block->getImagesValuesJson()) ?>" />
+<script type="text/javascript">
+    //<![CDATA[
+    var <?php echo $_block->getJsObjectName(); ?> = new Product.Gallery('<?php echo $_block->getHtmlId() ?>', <?php echo $_block->getUploader()->getJsObjectName() ?>, <?php echo $_block->getImageTypesJson() ?>);
+    //]]>
+</script>
+<div class="notice">
+    Instructions:<br/>
+    <ul>
+        <li>First Browse for images (can add multiple images at once)
+        <li>Then upload files
+        <li>Then click 'save and continue edit'
+        <li>You can thereafter see uploaded images, and set link information.
+    </ul>
+    <br/>You can generate a demo banner using 'gen:[width]:[height]' in the Image Link field: example gen:728:90
+    <br/>NOTE: Multiple banners will result in a carousel.
+    <br/><br/><h3>Common Banner Image sizes:</h3>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Standard_web_banner_ad_sizes.svg/400px-Standard_web_banner_ad_sizes.svg.png"/>
+
+</div>

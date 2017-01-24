@@ -1,0 +1,706 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+
+    <default>
+        <reference name="cart_sidebar">
+            <action method="addItemRender">
+                <type>gift-simple</type>
+                <block>giftpromo/cart_item_renderer_simple</block>
+                <template>giftpromo/cart/sidebar/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-configurable</type>
+                <block>giftpromo/cart_item_renderer_configurable</block>
+                <template>giftpromo/cart/sidebar/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-downloadable</type>
+                <block>giftpromo/cart_item_renderer_downloadable</block>
+                <template>giftpromo/cart/sidebar/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-bundle</type>
+                <block>giftpromo/cart_item_renderer_bundle</block>
+                <template>giftpromo/cart/sidebar/default.phtml</template>
+            </action>
+        </reference>
+        <reference name="minicart_content">
+            <action method="addItemRender">
+                <type>gift-simple</type>
+                <block>giftpromo/cart_item_renderer_simple</block>
+                <template>giftpromo/cart/minicart/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-configurable</type>
+                <block>giftpromo/cart_item_renderer_configurable</block>
+                <template>giftpromo/cart/minicart/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-downloadable</type>
+                <block>giftpromo/cart_item_renderer_downloadable</block>
+                <template>giftpromo/cart/minicart/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-bundle</type>
+                <block>giftpromo/cart_item_renderer_bundle</block>
+                <template>giftpromo/cart/minicart/default.phtml</template>
+            </action>
+        </reference>
+    </default>
+
+    <checkout_cart_index translate="label">
+        <reference name="head">
+            <action method="addJs">
+                <script>varien/product.js</script>
+            </action>
+            <action method="addJs">
+                <script>giftpromo/ext-product.js</script>
+            </action>
+            <action method="addJs">
+                <script>giftpromo/ext-form.js</script>
+            </action>
+            <action method="addJs">
+                <script>giftpromo/dialog.js</script>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/giftpromo.css</stylesheet>
+            </action>
+            <action method="addJs" ifconfig="giftpromo/cart/selectitems_bestfit">
+                <script>giftpromo/masonry.pkgd.min.js</script>
+            </action>
+            <action method="addJs" ifconfig="giftpromo/cart/selectitems_bestfit">
+                <script>giftpromo/imagesloaded.pkgd.min.js</script>
+            </action>
+        </reference>
+        <reference name="checkout.cart">
+            <action method="addItemRender">
+                <type>gift-simple</type>
+                <block>giftpromo/cart_item_renderer_simple</block>
+                <template>giftpromo/cart/item/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-configurable</type>
+                <block>giftpromo/cart_item_renderer_configurable</block>
+                <template>giftpromo/cart/item/configurable.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-downloadable</type>
+                <block>giftpromo/cart_item_renderer_downloadable</block>
+                <template>giftpromo/cart/item/downloadable.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-bundle</type>
+                <block>giftpromo/cart_item_renderer_bundle</block>
+                <template>giftpromo/cart/item/bundle.phtml</template>
+            </action>
+        </reference>
+        <reference name="checkout.cart.form.before">
+            <block type="giftpromo/cart_selectgifts" name="cart.select.gifts" after="-"
+                   template="giftpromo/cart/selectgifts.phtml">
+                <block type="giftpromo/product_view" name="gift-configurable.product.info.options.wrapper"
+                       as="gift-configurable_product_options_wrapper"
+                       template="giftpromo/catalog/product/view/options/wrapper.phtml" translate="label">
+                    <label>Info Column Options Wrapper</label>
+                    <block type="core/template" name="options_js" template="catalog/product/view/options/js.phtml"/>
+                    <block type="giftpromo/product_select_options" name="product.info.options" as="product_options"
+                           template="giftpromo/catalog/product/options.phtml">
+                        <action method="addOptionRenderer">
+                            <type>text</type>
+                            <block>catalog/product_view_options_type_text</block>
+                            <template>catalog/product/view/options/type/text.phtml</template>
+                        </action>
+                        <action method="addOptionRenderer">
+                            <type>file</type>
+                            <block>catalog/product_view_options_type_file</block>
+                            <template>catalog/product/view/options/type/file.phtml</template>
+                        </action>
+                        <action method="addOptionRenderer">
+                            <type>select</type>
+                            <block>catalog/product_view_options_type_select</block>
+                            <template>catalog/product/view/options/type/select.phtml</template>
+                        </action>
+                        <action method="addOptionRenderer">
+                            <type>date</type>
+                            <block>catalog/product_view_options_type_date</block>
+                            <template>catalog/product/view/options/type/date.phtml</template>
+                        </action>
+                    </block>
+                    <block type="giftpromo/product_view_type_configurable" name="product.info.options.configurable"
+                           as="options_configurable" before="-"
+                           template="giftpromo/cart/selectgifts/type/options/configurable.phtml"/>
+                </block>
+
+                <block type="giftpromo/product_view" name="gift-simple.product.info.options.wrapper"
+                       as="gift-simple_product_options_wrapper"
+                       template="giftpromo/catalog/product/view/options/wrapper.phtml" translate="label">
+                    <label>Info Column Options Wrapper</label>
+                    <block type="core/template" name="options_js" template="catalog/product/view/options/js.phtml"/>
+                    <block type="giftpromo/product_select_options" name="product.info.options" as="product_options"
+                           template="giftpromo/catalog/product/options.phtml">
+                        <action method="addOptionRenderer">
+                            <type>text</type>
+                            <block>catalog/product_view_options_type_text</block>
+                            <template>catalog/product/view/options/type/text.phtml</template>
+                        </action>
+                        <action method="addOptionRenderer">
+                            <type>file</type>
+                            <block>catalog/product_view_options_type_file</block>
+                            <template>catalog/product/view/options/type/file.phtml</template>
+                        </action>
+                        <action method="addOptionRenderer">
+                            <type>select</type>
+                            <block>catalog/product_view_options_type_select</block>
+                            <template>catalog/product/view/options/type/select.phtml</template>
+                        </action>
+                        <action method="addOptionRenderer">
+                            <type>date</type>
+                            <block>catalog/product_view_options_type_date</block>
+                            <template>catalog/product/view/options/type/date.phtml</template>
+                        </action>
+                    </block>
+                </block>
+
+                <block type="giftpromo/product_view" name="gift-downloadable.product.info.options.wrapper"
+                       as="gift-downloadable_product_options_wrapper"
+                       template="giftpromo/catalog/product/view/options/wrapper.phtml" translate="label">
+                    <label>Catalog Product View (Downloadable)</label>
+                    <block type="downloadable/catalog_product_links" name="product.info.downloadable.options"
+                           as="type_downloadable_options" before="-"
+                           template="downloadable/catalog/product/links.phtml"/>
+                    <action method="insert">
+                        <block>product.info.downloadable.options</block>
+                    </action>
+                </block>
+
+            </block>
+        </reference>
+        <reference name="before_body_end">
+            <block type="core/template" name="update_top_cart"
+                   template="giftpromo/onepage/review/update_top_cart.phtml"/>
+        </reference>
+    </checkout_cart_index>
+
+
+    <!--
+    Multi address shipping checkout address page
+    -->
+
+    <checkout_multishipping_addresses translate="label">
+        <!-- Mage_Checkout -->
+        <reference name="checkout_addresses">
+            <action method="addItemRender">
+                <type>gift-simple</type>
+                <block>giftpromo/cart_item_renderer_simple</block>
+                <template>giftpromo/multishipping/item/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-configurable</type>
+                <block>giftpromo/cart_item_renderer_configurable</block>
+                <template>giftpromo/multishipping/item/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-downloadable</type>
+                <block>giftpromo/cart_item_renderer_downloadable</block>
+                <template>downloadable/checkout/multishipping/item/downloadable.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-bundle</type>
+                <block>giftpromo/cart_item_renderer_bundle</block>
+                <template>giftpromo/multishipping/item/default.phtml</template>
+            </action>
+        </reference>
+    </checkout_multishipping_addresses>
+
+    <!--
+    Multi address shipping checkout shipping information
+    -->
+
+    <checkout_multishipping_shipping translate="label">
+        <reference name="checkout_shipping">
+            <action method="addItemRender">
+                <type>gift-simple</type>
+                <block>giftpromo/cart_item_renderer_simple</block>
+                <template>giftpromo/multishipping/item/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-configurable</type>
+                <block>giftpromo/cart_item_renderer_configurable</block>
+                <template>giftpromo/multishipping/item/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-downloadable</type>
+                <block>giftpromo/cart_item_renderer_downloadable</block>
+                <template>downloadable/checkout/multishipping/item/downloadable.phtml</template>
+            </action>
+            <reference name="checkout_billing_items">
+                <action method="addItemRender">
+                    <type>gift-simple</type>
+                    <block>giftpromo/cart_item_renderer_simple</block>
+                    <template>giftpromo/multishipping/item/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>gift-configurable</type>
+                    <block>giftpromo/cart_item_renderer_configurable</block>
+                    <template>giftpromo/multishipping/item/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>gift-downloadable</type>
+                    <block>giftpromo/cart_item_renderer_downloadable</block>
+                    <template>downloadable/checkout/multishipping/item/downloadable.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>gift-bundle</type>
+                    <block>giftpromo/cart_item_renderer_bundle</block>
+                    <template>giftpromo/multishipping/item/default.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </checkout_multishipping_shipping>
+
+    <!--
+    Multi address shipping checkout overview
+    -->
+
+    <checkout_multishipping_overview translate="label">
+        <reference name="checkout_overview">
+            <action method="addItemRender">
+                <type>gift-simple</type>
+                <block>giftpromo/cart_item_renderer_simple</block>
+                <template>giftpromo/multishipping/item/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-configuable</type>
+                <block>giftpromo/cart_item_renderer_configurable</block>
+                <template>giftpromo/multishipping/item/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-downloadable</type>
+                <block>giftpromo/cart_item_renderer_downloadable</block>
+                <template>downloadable/checkout/multishipping/item/downloadable.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-bundle</type>
+                <block>giftpromo/cart_item_renderer_bundle</block>
+                <template>giftpromo/multishipping/item/default.phtml</template>
+            </action>
+        </reference>
+    </checkout_multishipping_overview>
+
+    <giftpromo_checkout_onepage_index>
+        <reference name="head">
+            <action method="addJs">
+                <script>varien/product.js</script>
+            </action>
+            <action method="addJs">
+                <script>giftpromo/ext-product.js</script>
+            </action>
+            <action method="addJs">
+                <script>giftpromo/ext-form.js</script>
+            </action>
+            <action method="addJs">
+                <script>giftpromo/dialog.js</script>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/giftpromo.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="giftpromo/cart_selectgifts" name="checkout.warn.gifts" before="-"
+                   template="giftpromo/onepage/nogiftsselected.phtml"/>
+        </reference>
+    </giftpromo_checkout_onepage_index>
+
+
+    <checkout_onepage_index translate="label">
+        <update handle="giftpromo_checkout_onepage_index"/>
+    </checkout_onepage_index>
+
+
+    <!--
+    One page checkout order review block
+    -->
+
+    <giftpromo_onepage_review_before>
+        <reference name="checkout.onepage.review.info.items.before">
+            <block type="core/template" name="update_top_cart"
+                   template="giftpromo/onepage/review/update_top_cart.phtml"/>
+            <block type="giftpromo/cart_selectgifts" name="cart.select.gifts" after="-"
+                   template="giftpromo/onepage/review/selectgifts.phtml">
+                <block type="giftpromo/product_view" name="gift-configurable.product.info.options.wrapper"
+                       as="gift-configurable_product_options_wrapper"
+                       template="giftpromo/catalog/product/view/options/wrapper.phtml" translate="label">
+                    <label>Info Column Options Wrapper</label>
+                    <block type="core/template" name="options_js" template="catalog/product/view/options/js.phtml"/>
+                    <block type="giftpromo/product_select_options" name="product.info.options" as="product_options"
+                           template="giftpromo/catalog/product/options.phtml">
+                        <action method="addOptionRenderer">
+                            <type>text</type>
+                            <block>catalog/product_view_options_type_text</block>
+                            <template>catalog/product/view/options/type/text.phtml</template>
+                        </action>
+                        <action method="addOptionRenderer">
+                            <type>file</type>
+                            <block>catalog/product_view_options_type_file</block>
+                            <template>catalog/product/view/options/type/file.phtml</template>
+                        </action>
+                        <action method="addOptionRenderer">
+                            <type>select</type>
+                            <block>catalog/product_view_options_type_select</block>
+                            <template>catalog/product/view/options/type/select.phtml</template>
+                        </action>
+                        <action method="addOptionRenderer">
+                            <type>date</type>
+                            <block>catalog/product_view_options_type_date</block>
+                            <template>catalog/product/view/options/type/date.phtml</template>
+                        </action>
+                    </block>
+                    <block type="giftpromo/product_view_type_configurable" name="product.info.options.configurable"
+                           as="options_configurable" before="-"
+                           template="giftpromo/cart/selectgifts/type/options/configurable.phtml"/>
+                </block>
+                <block type="giftpromo/product_view" name="gift-simple.product.info.options.wrapper"
+                       as="gift-simple_product_options_wrapper"
+                       template="giftpromo/catalog/product/view/options/wrapper.phtml" translate="label">
+                    <label>Info Column Options Wrapper</label>
+                    <block type="core/template" name="options_js" template="catalog/product/view/options/js.phtml"/>
+                    <block type="giftpromo/product_select_options" name="product.info.options" as="product_options"
+                           template="giftpromo/catalog/product/options.phtml">
+                        <action method="addOptionRenderer">
+                            <type>text</type>
+                            <block>catalog/product_view_options_type_text</block>
+                            <template>catalog/product/view/options/type/text.phtml</template>
+                        </action>
+                        <action method="addOptionRenderer">
+                            <type>file</type>
+                            <block>catalog/product_view_options_type_file</block>
+                            <template>catalog/product/view/options/type/file.phtml</template>
+                        </action>
+                        <action method="addOptionRenderer">
+                            <type>select</type>
+                            <block>catalog/product_view_options_type_select</block>
+                            <template>catalog/product/view/options/type/select.phtml</template>
+                        </action>
+                        <action method="addOptionRenderer">
+                            <type>date</type>
+                            <block>catalog/product_view_options_type_date</block>
+                            <template>catalog/product/view/options/type/date.phtml</template>
+                        </action>
+                    </block>
+                </block>
+                <block type="giftpromo/product_view" name="gift-downloadable.product.info.options.wrapper"
+                       as="gift-downloadable_product_options_wrapper"
+                       template="giftpromo/catalog/product/view/options/wrapper.phtml" translate="label">
+                    <label>Catalog Product View (Downloadable)</label>
+                    <block type="downloadable/catalog_product_links" name="product.info.downloadable.options"
+                           as="type_downloadable_options" before="-"
+                           template="downloadable/catalog/product/links.phtml"/>
+                    <action method="insert">
+                        <block>product.info.downloadable.options</block>
+                    </action>
+                </block>
+            </block>
+        </reference>
+    </giftpromo_onepage_review_before>
+
+    <checkout_onepage_review translate="label">
+        <reference name="root">
+            <action method="addItemRender">
+                <type>gift-simple</type>
+                <block>giftpromo/cart_item_renderer_simple</block>
+                <template>giftpromo/onepage/review/item.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-configurable</type>
+                <block>giftpromo/cart_item_renderer_configurable</block>
+                <template>giftpromo/onepage/review/item.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-downloadable</type>
+                <block>giftpromo/cart_item_renderer_downloadable</block>
+                <template>downloadable/checkout/onepage/review/item.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-bundle</type>
+                <block>giftpromo/cart_item_renderer_bundle</block>
+                <template>giftpromo/onepage/review/item.phtml</template>
+            </action>
+        </reference>
+        <update handle="giftpromo_onepage_review_before"/>
+    </checkout_onepage_review>
+
+    <catalog_product_view>
+        <reference name="right">
+            <block type="giftpromo/product_list_gifts" name="catalog.product.gifts" before="-"
+                   template="giftpromo/catalog/product/list/gifts.phtml"/>
+        </reference>
+    </catalog_product_view>
+
+    <catalog_category_default>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/giftpromo-icon.css</stylesheet>
+            </action>
+        </reference>
+    </catalog_category_default>
+
+    <catalog_category_layered>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/giftpromo-icon.css</stylesheet>
+            </action>
+        </reference>
+    </catalog_category_layered>
+
+    <catalogsearch_result_index>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/giftpromo-icon.css</stylesheet>
+            </action>
+        </reference>
+    </catalogsearch_result_index>
+
+    <cms_page_view>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/giftpromo-icon.css</stylesheet>
+            </action>
+        </reference>
+    </cms_page_view>
+
+    <cms_index_index>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/giftpromo-icon.css</stylesheet>
+            </action>
+        </reference>
+    </cms_index_index>
+
+    /** GOMAGE CHECKOUT ONEPAGE **/
+
+    <gomage_checkout_onepage_index>
+        <update handle="giftpromo_checkout_onepage_index"/>
+        <reference name="info">
+            <action method="addItemRender">
+                <type>gift-simple</type>
+                <block>giftpromo/cart_item_renderer_simple</block>
+                <template>giftpromo/gomage/review/item.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-configurable</type>
+                <block>giftpromo/cart_item_renderer_configurable</block>
+                <template>giftpromo/gomage/review/item.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-downloadable</type>
+                <block>giftpromo/cart_item_renderer_downloadable</block>
+                <template>giftpromo/gomage/review/item.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-bundle</type>
+                <block>giftpromo/cart_item_renderer_bundle</block>
+                <template>giftpromo/gomage/review/item.phtml</template>
+            </action>
+        </reference>
+        <update handle="giftpromo_onepage_review_before"/>
+    </gomage_checkout_onepage_index>
+
+    <gomage_checkout_onepage_review>
+        <reference name="root">
+            <action method="addItemRender">
+                <type>gift-simple</type>
+                <block>giftpromo/cart_item_renderer_simple</block>
+                <template>giftpromo/gomage/review/item.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-configurable</type>
+                <block>giftpromo/cart_item_renderer_configurable</block>
+                <template>giftpromo/gomage/review/item.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-downloadable</type>
+                <block>giftpromo/cart_item_renderer_downloadable</block>
+                <template>giftpromo/gomage/review/item.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>gift-bundle</type>
+                <block>giftpromo/cart_item_renderer_bundle</block>
+                <template>giftpromo/gomage/review/item.phtml</template>
+            </action>
+        </reference>
+        <update handle="giftpromo_onepage_review_before"/>
+    </gomage_checkout_onepage_review>
+
+    <catalog_product_giftview translate="label">
+        <update handle="catalog_product_view"/>
+        <reference name="root">
+            <action method="unsetChild">
+                <name>breadcrumbs</name>
+            </action>
+        </reference>
+        <reference name="product.info.addtocart">
+            <action method="setTemplate">
+                <value>giftpromo/catalog/product/view/addtocart.phtml</value>
+            </action>
+        </reference>
+    </catalog_product_giftview>
+
+    <catalog_product_popup translate="label">
+        <update handle="catalog_product_view"/>
+    </catalog_product_popup>
+
+
+
+
+    <PRODUCT_TYPE_gift-configurable>
+        <update handle="PRODUCT_TYPE_configurable"/>
+        <reference name="product.info">
+            <action method="setTemplate">
+                <value>giftpromo/bundle/catalog/product/view.phtml</value>
+            </action>
+        </reference>
+    </PRODUCT_TYPE_gift-configurable>
+
+    <PRODUCT_TYPE_gift-bundle>
+        <update handle="PRODUCT_TYPE_bundle"/>
+        <reference name="product.info">
+            <action method="setTemplate">
+                <value>giftpromo/bundle/catalog/product/view.phtml</value>
+            </action>
+        </reference>
+        <reference name="bundle.prices">
+            <action method="setTemplate">
+                <value>giftpromo/bundle/catalog/product/view/price.phtml</value>
+            </action>
+        </reference>
+    </PRODUCT_TYPE_gift-bundle>
+
+    <sales_order_view>
+        <reference name="order_items">
+            <action method="addItemRender"><type>gift-bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/sales/order/items/renderer.phtml</template></action>
+        </reference>
+    </sales_order_view>
+
+    <sales_order_invoice>
+        <reference name="invoice_items">
+            <action method="addItemRender"><type>gift-bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/sales/order/invoice/items/renderer.phtml</template></action>
+        </reference>
+    </sales_order_invoice>
+
+    <sales_order_shipment>
+        <reference name="shipment_items">
+            <action method="addItemRender"><type>gift-bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/sales/order/shipment/items/renderer.phtml</template></action>
+        </reference>
+    </sales_order_shipment>
+
+    <sales_order_creditmemo>
+        <reference name="creditmemo_items">
+            <action method="addItemRender"><type>gift-bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/sales/order/creditmemo/items/renderer.phtml</template></action>
+        </reference>
+    </sales_order_creditmemo>
+
+    <!--
+For guests
+-->
+    <sales_guest_view>
+        <reference name="order_items">
+            <action method="addItemRender"><type>gift-bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/sales/order/items/renderer.phtml</template></action>
+        </reference>
+    </sales_guest_view>
+
+    <sales_guest_invoice>
+        <reference name="invoice_items">
+            <action method="addItemRender"><type>gift-bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/sales/order/invoice/items/renderer.phtml</template></action>
+        </reference>
+    </sales_guest_invoice>
+
+    <sales_guest_shipment>
+        <reference name="shipment_items">
+            <action method="addItemRender"><type>gift-bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/sales/order/shipment/items/renderer.phtml</template></action>
+        </reference>
+    </sales_guest_shipment>
+
+    <sales_guest_creditmemo>
+        <reference name="creditmemo_items">
+            <action method="addItemRender"><type>gift-bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/sales/order/creditmemo/items/renderer.phtml</template></action>
+        </reference>
+    </sales_guest_creditmemo>
+
+    <sales_guest_print>
+        <reference name="sales.order.print">
+            <action method="addItemRender"><type>gift-bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/sales/order/items/renderer.phtml</template></action>
+        </reference>
+    </sales_guest_print>
+
+    <sales_guest_printinvoice>
+        <reference name="sales.order.print.invoice">
+            <action method="addItemRender"><type>gift-bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/sales/order/invoice/items/renderer.phtml</template></action>
+        </reference>
+    </sales_guest_printinvoice>
+
+    <sales_guest_printshipment>
+        <reference name="sales.order.print.shipment">
+            <action method="addItemRender"><type>gift-bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/sales/order/shipment/items/renderer.phtml</template></action>
+        </reference>
+    </sales_guest_printshipment>
+
+    <sales_guest_printcreditmemo>
+        <reference name="sales.order.print.creditmemo">
+            <action method="addItemRender"><type>gift-bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/sales/order/creditmemo/items/renderer.phtml</template></action>
+        </reference>
+    </sales_guest_printcreditmemo>
+
+    <!--
+    Emails
+    -->
+    <sales_email_order_items>
+        <reference name="items">
+            <action method="addItemRender"><type>gift-bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/email/order/items/order/default.phtml</template></action>
+        </reference>
+    </sales_email_order_items>
+
+    <sales_email_order_invoice_items>
+        <reference name="items">
+            <action method="addItemRender"><type>gift-bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/email/order/items/invoice/default.phtml</template></action>
+        </reference>
+    </sales_email_order_invoice_items>
+
+
+    <sales_email_order_shipment_items>
+        <reference name="items">
+            <action method="addItemRender"><type>gift-bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/email/order/items/shipment/default.phtml</template></action>
+        </reference>
+    </sales_email_order_shipment_items>
+
+    <sales_email_order_creditmemo_items>
+        <reference name="items">
+            <action method="addItemRender"><type>gift-bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/email/order/items/creditmemo/default.phtml</template></action>
+        </reference>
+    </sales_email_order_creditmemo_items>
+
+    <sales_order_print>
+        <reference name="sales.order.print">
+            <action method="addItemRender"><type>gift-bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/sales/order/items/renderer.phtml</template></action>
+        </reference>
+    </sales_order_print>
+
+    <sales_order_printinvoice>
+        <reference name="sales.order.print.invoice">
+            <action method="addItemRender"><type>gift-bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/sales/order/invoice/items/renderer.phtml</template></action>
+        </reference>
+    </sales_order_printinvoice>
+
+    <sales_order_printshipment>
+        <reference name="sales.order.print.shipment">
+            <action method="addItemRender"><type>gift-bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/sales/order/shipment/items/renderer.phtml</template></action>
+        </reference>
+    </sales_order_printshipment>
+
+    <sales_order_printcreditmemo>
+        <reference name="sales.order.print.creditmemo">
+            <action method="addItemRender"><type>gift-bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/sales/order/creditmemo/items/renderer.phtml</template></action>
+        </reference>
+    </sales_order_printcreditmemo>
+
+
+</layout>

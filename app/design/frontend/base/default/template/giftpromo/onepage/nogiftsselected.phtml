@@ -1,0 +1,30 @@
+<?php if ($this->disableInCheckout() == true && $this->getItems()->getSize()
+): ?>
+    <?php foreach ($this->getItems() as $_rule): ?>
+        <?php if ($_rule->getQualifyMessage() != '{NO MESSAGE}'): ?>
+            <?php
+            $message = trim($_rule->getQualifyMessage());
+            $message = (!empty($message)) ? $_rule->getQualifyMessage() : "You qualify for a promotion"
+            ?>
+            <?php if ($_rule->getItems()->getSize()): ?>
+                <?php if (count($_rule->getGiftCartItems($this->getQuote())) == 0): ?>
+                    <div class="giftselect">
+                        <ul class="messages">
+                            <li class="notice-msg">
+                                <ul>
+                                    <li>
+                                    <span><?php echo $this->escapeHtml($message) . $this->__(
+                                                ", please <a href='%s'>view your cart</a> to select your promotional item",
+                                                $this->getCartUrl()
+                                            ); ?></span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <?php break;
+                endif; ?>
+            <?php endif; ?>
+        <?php endif; ?>
+    <?php endforeach; ?>
+<?php endif; ?>

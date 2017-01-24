@@ -1,0 +1,15 @@
+/app/code/community/ProxiBlue/GiftPromo
+/app/design/adminhtml/default/default/layout/giftpromo.xml
+/app/design/adminhtml/default/default/template/giftpromo
+/app/design/frontend/base/default/layout/giftpromo.xml
+/app/design/frontend/base/default/template/giftpromo
+/app/etc/modules/ProxiBlue_GiftPromo.xml
+/app/locale/en_AU/ProxiBlue_GiftPromo.csv
+/app/locale/en_US/ProxiBlue_GiftPromo.csv
+/js/giftpromo
+/skin/frontend/base/default/css/giftpromo.css
+/skin/frontend/base/default/css/giftpromo-icon.css
+/skin/adminhtml/default/default/giftpromo
+/skin/frontend/base/default/images/giftpromo/
+/app/design/frontend/rwd/default/template/giftpromo
+/app/locale/en_US/template/email/giftpromo

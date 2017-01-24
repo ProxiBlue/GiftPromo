@@ -1,0 +1,206 @@
+2.0.0   : Initial release with coupon code and dropped catalog/category gifting areas
+2.0.1   : Remove debug code from simple price model
+2.1.0   : Add qty limitators and ratios to promo rule gift items
+2.1.1   : Fix bug in unsetting use autogeneration option
+2.1.2   : Fix bug where multiple coupon rules get mixed up
+2.1.3   : Fix loop in cart when configurable added and person is logged in
+2.1.4   : Fix loop in cart when persistent cart has a gift in the cart.
+2.1.5   : Fix another potential loop when persistent is active, and top cart has items to display
+2.1.6   : Fix bug 0000030 : Subtotal validation not removing gift items totals
+        : Fix bug 0000029 : Multiple clicks possible when adding selectable items to cart
+        : Fix bug 0000028 : Item sort position dud not save in admin
+2.1.7   : Make fix in 2.1.6 for bug  0000028 more robust.
+2.1.8   : FOund another potential loop in gift checking.
+2.1.9   : Fix element not found bug in js that breaks coupon box in cart
+2.1.10  : Fix order totals collection to specific order.
+2.1.11  : At times, subtotal includes tax. Adjust validation to accommodate that
+2.1.12  :  Additional tweaks to 2.1.11 changes
+2.1.13  : Adjust checkout checkForGifts to only run if Login or Register happens
+2.1.14  : Fix unserialize issue in observer
+2.1.15  : Strip out checkout registration rule and gifting checks as it cause issues
+2.1.16  : Workaround for IWD onestepchekout and collectotals quote object not having totals issue
+2.2.0   : Adjust for pre 1.6 magento versions
+2.3.0	: Add Grand Total Rule
+        : Changed collect totals order to run after discounts.
+2.3.1   : Patch release: incorperate the fixes of 'lost' version 2_1_17 - fix qty-rate-calculations
+2.3.2   : Restructure rule display.
+        : More Cart based rules and Checkout based rules
+        : Start of magento 1.9 rwd theme integration
+2.3.3   : Fix issue with currentselectedgift being false causing gifts to be removed.
+2.3.4   : Fix issue with coupons tab in admin for magento < 1.6
+        : Fix issue with gift not removed for some rule types, if item is removed and rule no longer validates
+2.3.5	: magento 1.9 RWD theme adjustments. This then moves the select gifts option in admin to form_before area in cart
+2.3.6	: Adjusts for magento Pro.
+2.3.7 	: Block gifts from adding again when cart merges (caused duplicate gifts)
+2.4.0	: Ability to have multiple gifts on gift select in one promo rule
+2.4.1   : Fix issue with order create via admin
+2.4.2   : Fix bugs surrounding product attributes, and <1.6 coupon tabs in admin
+2.4.3	: Fix bug with multiple select gifts in cart. (not all buttons were disabled)
+2.4.4   : Fix bug with selectable gifts showing gift already in cart. This skips that gift from the selectable list of items
+2.4.5   : Place a block in cart controller to not action of gift replaced/added is the same as already in cart.
+2.4.6   : Fix non object issue in coupon export via admin
+2.4.7   : Remove gift coupons from sales coupon report
+2.4.8   : Fix bug when gift is added, then removed, then add any other product afterwards, gift is added for a non gifting rule products
+2.4.9   : Additional fixes on bug found in 2.4.8
+2.4.10  : Fix bug with count of items including invisible items in cart subselect rule
+2.4.11  : Change that stop further processing is only applied if rule is valid, or already valid and actioned.
+        : Fix Bug 468569_incorrect_gift_products_qty_increment
+2.5.0   : Rework how gifts are associated to parent products. This is a substantial change in the module core functionality
+        : Drop ratio limiter sku functionality as it is causing sme major isues
+2.5.1   : Fix customer login and removal of gifts
+        : Potential fix to image display in selectable gifts and cart line items for the gifts
+        : Fix selectable list to disappear if a gift is selected.
+2.5.2   : Fix bug with magento pro missing method in magento
+        : add ability to set gift select message with placeholders via admin
+        : Fix bug in gift icon display.
+2.5.3   : More RWD theme files.
+        : various minor bug fixes
+2.5.4   : Fix display of gift icon for product attribute related gifts rules
+2.5.5   : Fix that gift icon appeared for all products if gifted item is in cart
+        : Strip out a lot of legacy code from the products and category related gifting areas
+2.6.0   : Cheapest Free
+2.6.1   : Cheapest free includes bundles
+2.6.2   : Improve performance on gift icon display code in category lists (now uses BLOCK CACHE valid for 3600 minutes)
+2.6.3   : Move rule model instantiation inside validation conditional for icons
+2.6.4   : Place notification of gifts available in review
+2.6.5/6   : Selectable Gifts In checkout Review
+2.6.7	: Fix some issues with new functionality from 2.6.5. Skip links on hidden products
+2.6.8   : Fix remove of item in checkout review. Optimize code in gift lists.
+2.6.9   : Add a cache to product validation on is in promotions and gift icons display
+2.7.0   : Ability to select X of Y in selectable gifts in cart and review
+2.7.1   : Remove old 'you qualify for a gift' checkout message - no longer required since you can select gifts in review
+        : Remove old parked gift code
+        : Fix trapping of adding gift to cart exceptions
+2.7.2   : Ability to disable checkout selectable gifts in review via admin setting
+2.7.3   : Improve performance on ProxiBlue_GiftPromo_Model_Promo_Rule_Condition_Product_Subselect::validate
+2.7.4   : Fix issue with selectable items being duplicated due to invisible configurable items
+2.7.5   : Fix setting error message to cart via validator code
+2.7.6   : Fix bug when customer logins in, and has stale previous cart data, which can in some instacnes cause gifting to loop
+2.7.7   : Fix issue with magento 1.9.1.0 and gifting on selected child item
+2.7.8   : Fix cache bug with gift icon display - bug was letting all products appear in all products #691442
+        : Adjust Cheapest free to accommodate multiples of the same item in qty
+2.7.9   : Adjust select gifts in checkout to always output https:// getAddToCartUrl
+2.7.10  : Adjust checkout to force https in gift remove url
+        : Add back top message in checkout that gifts are available if selectable gifts in cart is disabled.
+        : Adjust topcartqty call to force https://
+2.7.11  : prevent dead 404 links for invisible products in minicart and product view
+        : Adjust css o include .shopping-cart tag
+2.7.12  : Fix bug with subtotal (totals) rules not re-evaluating correctly if value is 0
+        : Fix issue with cheapest free not re-evaluating if items in cart removed, and changed
+2.7.13  : Fix issue with selectable gifts and totals rules
+2.8.0   : Simples with options
+2.8.1   : Adjust grand total rule to use subtotal if 0
+2.8.2   : Simple options in checkout review
+2.8.3   : Fix re-eval of lowest priced item
+2.9.0   : Compatibility with GOMAGE checkout
+2.9.1   : Fix bug surrounding Products WIth Options, and RWD checkout
+        : Improve cache handling
+2.9.2   : Initial Multiple Of release
+        : Fix message factory bug in validator
+        : Decrease timeout of cache elements to 10 minutes
+2.9.3   : Bug fix in Lowest FREE for some types of rule configurations / combinations
+        : Bug fix with subtotal threshold and tax inclusive/exclusive configurations
+        : Adjust Lowest free to consider product discounts in checking which is the cheapest item
+2.9.4   : Fix issues with gift-bundle
+2.9.5   : Compatibility with et_paymentextracharge
+2.10.0  : Gift select without forms! - Had issues with nested forms in one step checkouts (gomage for one)
+2.10.1  : Block gifting from running more than 2 times on one session (iteration) - prevents loops in collect subsystem
+2.10.2  : Fix login bug that alowed selectable lists to re-appear and allow products to be selected again
+2.11.0  : Ad ability to limit the number of times a rule will validate in order. Prevents multiple of same selectable gifts rows in cart/cehckout
+2.10.2  : Fix login bug that allowed selectable lists to re-appear and allow products to be selected again
+2.11.0  : Ad ability to limit the number of times a rule will validate in order. Prevents multiple of same selectable gifts rows in cart/cehckout
+2.11.1  : Further work on fix for 2.11.0, the gift item buyRequest needed adjusting to new ids
+2.12.0  : Rewrite core checkout session and change how old and new quotes are merged (old to new, not new to old) - this fixes login issues with selectable gifts (2.10.2/2.11.1)
+2.12.1  : Change how secure/non secure urls are created for giftselect lists
+2.12.2  : Fix dependency on .page css class in dialog on gift adding. Adjust to trap this, and also allow add to cart to continue if something
+2.12.3  : Hide gift product type of bundle
+2.13.0	: FEATURE: Upgrades
+2.13.1  : Add requested event to adjust product composite message in cart
+        : Add in missing calls to composite message in RWD theme files
+2.13.2  : Improve performance when doing add to cart form selectable gifts. Eliminated unwanted iterations of totals collector
+2.13.3  : Adjust how performance improvements in 2.13.2 was done
+2.13.4  : Fix dialog popup close button
+2.13.5  : Fix customer rule usage limits
+        : Add new Usage Limit to main rule.
+2.13.6  : Add new Usage limits on coupon
+2.13.7  : More usage limits on coupons
+2.13.8  : Fix bug where product attributes on selectable lists are not loaded in product object, thus validation of product attributes may fail
+2.14.0  : Feature: Multiple of on subselection
+2.14.1  : Fix configurable child qty not being limited by limit requirements in rule
+2.15.0  : Initial release for bundles gifting
+2.16.0/1/2/3/4  : Initial release of Buy X get X free
+2.16.5  : Add logic to block multiple gifting on product attribute gifting.
+        : Fix gift icon display to accommodate new get x free gifting
+2.16.6  : Fix get x free going whacky after gift # 3 - used a string in place of an array - oops
+2.16.7  : Fix is not object in product list pages
+2.16.8  : Fix bug related to buy x get x free and subselect conditions used in rules
+        : Refactor how subselect rules handle validation
+2.16.9  : Change how click through of gift items add to cart work
+2.16.10 : Adjust select gifts in checkout add / remove issues
+        : Change select gifts session data. Fixes payment fail allowing additional gift select bug
+2.16.11 : Add extra checks in getCartUlr for gift based products, just to make sure it is a gift object product
+        : Fix issue with multiple of subselect and qty's
+        : Fix for coupon applying and rule is not valid
+2.16.12 : Fix EE GiftCards
+2.17.0  : Add ability to block shopping cart rules by id.
+2.17.1  : Fix bug in upgrades
+2.17.2  : add '___store' param to gift display from cart to block EE FPC
+2.17.3  : Fix cancelling coupon and removal of the related cart items
+2.17.4  : SUPEE-6788 admin url fix
+2.17.5  : Adjustments to Cheapest Free : SUPP-2469771959818
+2.18.0  : Add multiple using checkboxes
+        : Potential fix to 404 on giftview from selectgifts
+        : Some improvements in performance
+	    : API (Thanks to DickSmith Electronics)
+2.18.1  : Add conflict tracking debug in admin
+        : Apply patch from Dick Smith for API
+2.19.0  : Ability to do % of real price gifting
+2.19.1  : Fix rule priority remove lower (blocked) priority products from cart
+2.19.2  : Adjust rule collection to update the item data. This fixes display issues in admin grid in CE 1.9.1
+2.19.3  : Fix ratio bug.
+2.19.4  : Change session used for selected gifts to checkout (was core)
+2.20.0  : Ability to add gift from select matching count of items in cart.
+2.20.1  : SagePay Compatibility
+        : Adjust to allow not visible to not link, using admin switch
+2.20.2  : Ability to strip gift- prefix form product types on API orderInfo call
+2.21.0  : ???
+2.22.0  : Adjust how selectable gifts are dealt with, allowing same selectable item to be added multiple times
+2.22.1  : Compatibility with aw_giftcards and aw_raf
+2.22.2  : Fix issue with configurable gift selection in add to cart
+2.23.0  : Ability to specify checkout promotion qualification messages, or exclude
+2.24.0  : Customer coupon email actions
+2.25.0  : Performance improvements. prevent rules processing a second time when index page reloads for cart
+        : Prevent double process if entering checkout (index->index)
+2.25.1  : Improve product to full product load and remove ->load() directive from inside loops.
+2.25.2	: Improve speed in subselect rules
+2.25.3  : Restore collect function in gift.php
+2.25.4  : Add _store to all getUrl calls to force correct (current) store url for multi-store setups.
+2.25.5  : Fix checkout gift select buttons.
+        : Fix payment option negative not is validation
+2.25.6  : Block call to isVirtual on object when method does not exist in class
+        : ensure null payment method does not validate true if is not on payment method rule is used.
+        : Fix ration bug when adding items to cart in checkout
+        : Move selected gift lists into own session namespace
+2.25.7  : Fix hidden stop rules processing option
+2.26.0  : Rework the Selectable Gifts Lists
+2.26.1  : Convert currency using rates
+        : Allow rules on same priority to conclude when used with stop rules processing
+2.27.0  : Add ability to add product to cart as a normal product, negating any gifting option on item.
+          - Handy to use as a type of linked products, with gifting engine listing other products as a list of available products
+        : Additional work on currency conversions
+2.27.1  : Fix issue with rule priority and selectable gift rules with stop processing option on
+2.27.2/3: Stop selectable rules with stop processing from stopping processing if nothing was selected
+2.27.4  : Fix issue with selectable gifts not closing when max gifts selected.
+2.27.5  : Adjust to set no rules as false by default (was true)
+        : Adjust to correctly remove selectable list items when removed from cart
+2.28.0  : Ability to gift X Cheapest Free
+2.28.1  : Fix remove of non selected gift leaves stragglers
+2.29.0  : Fix empty cart and field being an array, should be string (applied gift rule ids)
+        : Improve working of selectable gifts.
+        : Make possible for items in cart to upgrade to gifts if the item is part of active gifting in cart
+        : Direct to cart with % discount
+        : Non free gifts can have qty set.
+2.30.0  : Adjust for compatibility with amasty coupons 1.2.1
+2.40.0  : This is a recovery release. Since v 2.30.0, the functionality has become unstable.
+        : The release was rilled back, and fixes from 2.30.1 to 2.39.0 was re-applied, but functionality that cuased (suspected)
+        : was stripped out.

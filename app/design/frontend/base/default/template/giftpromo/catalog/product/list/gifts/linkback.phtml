@@ -1,0 +1,67 @@
+<?php if($this->getItems()->getSize()): ?>
+<div class="block block-gifts">
+    <div class="block-title">
+	<strong><span><?php echo mage::helper('giftpromo')->__('Available as a gift') ?></span></strong>
+    </div>
+    <div class="block-content">
+	<p class="block-subtitle"><?php echo mage::helper('giftpromo')->__('Available as a gift when purchased with the item(s) below.') ?></p>
+	<ol class="mini-products-list" id="block-gifts">
+	<?php foreach($this->getItems() as $_item): ?>
+	    <li class="item">
+		<div class="product">
+		    <a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_item->getName()) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(50) ?>" width="50" height="50" alt="<?php echo $this->htmlEscape($_item->getName()) ?>" /></a>
+		    <div class="product-details">
+			<p class="product-name"><a href="<?php echo $_item->getProductUrl() ?>"><?php echo $this->htmlEscape($_item->getName()) ?></a></p>
+			<?php echo $this->getPriceHtml($_item, true, '-gifts') ?>
+			<?php if(!$_item->isComposite() && $_item->isSaleable()): ?>
+			    <a href="<?php echo $this->getAddToCartUrl($_item) ?>" class="link-cart"><?php echo $this->__('Add to Cart') ?></a>
+			<?php endif; ?>
+			<br/>
+			<?php if ($this->helper('wishlist')->isAllow()) : ?>
+			    <a href="<?php echo $this->getAddToWishlistUrl($_item) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a>
+			<?php endif; ?>
+		    </div>
+		</div>
+	    </li>
+	<?php endforeach ?>
+	</ol>
+	<script type="text/javascript">decorateList('block-gifts', 'none-recursive')</script>
+    </div>
+    <script type="text/javascript">
+    //<![CDATA[
+    $$('.related-checkbox').each(function(elem){
+	Event.observe(elem, 'click', addRelatedToProduct)
+    });
+
+    var relatedProductsCheckFlag = false;
+    function selectAllRelated(txt){
+	if (relatedProductsCheckFlag == false) {
+	    $$('.related-checkbox').each(function(elem){
+		elem.checked = true;
+	    });
+	    relatedProductsCheckFlag = true;
+	    txt.innerHTML="<?php echo $this->__('unselect all') ?>";
+	} else {
+	    $$('.related-checkbox').each(function(elem){
+		elem.checked = false;
+	    });
+	    relatedProductsCheckFlag = false;
+	    txt.innerHTML="<?php echo $this->__('select all') ?>";
+	}
+	addRelatedToProduct();
+    }
+
+    function addRelatedToProduct(){
+	var checkboxes = $$('.related-checkbox');
+	var values = [];
+	for(var i=0;i<checkboxes.length;i++){
+	    if(checkboxes[i].checked) values.push(checkboxes[i].value);
+	}
+	if($('related-products-field')){
+	    $('related-products-field').value = values.join(',');
+	}
+    }
+    //]]>
+    </script>
+</div>
+<?php endif ?>

@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<layout>
+
+    <!-- GiftPromo Rules -->
+    <adminhtml_promo_rule_index>
+        <reference name="content">
+            <block type="giftpromo/adminhtml_promo_rule" name="giftpromo_promo_rule"></block>
+        </reference>
+    </adminhtml_promo_rule_index>
+
+    <adminhtml_promo_rule_edit>
+        <reference name="head">
+            <action method="setCanLoadExtJs">
+                <flag>1</flag>
+            </action>
+            <action method="setCanLoadRulesJs">
+                <flag>1</flag>
+            </action>
+        </reference>
+        <reference name="left">
+            <block type="giftpromo/adminhtml_promo_rule_edit_tabs" name="giftpromo_promo_rule_edit_tabs">
+                <block type="giftpromo/adminhtml_promo_rule_edit_tab_main" name="giftpromo_promo_rule_edit_tab_main"/>
+                <block type="giftpromo/adminhtml_promo_rule_edit_tab_conditions"
+                       name="giftpromo_promo_rule_edit_tab_conditions"/>
+                <block type="giftpromo/adminhtml_promo_rule_edit_tab_actions"
+                       name="giftpromo_promo_rule_edit_tab_actions"/>
+                <block type="giftpromo/adminhtml_promo_rule_edit_tab_coupons"
+                       name="giftpromo_promo_rule_edit_tab_coupons">
+                    <block type="giftpromo/adminhtml_promo_rule_edit_tab_coupons_form"
+                           name="giftpromo_promo_rule_edit_tab_coupons_form"/>
+                    <block type="giftpromo/adminhtml_promo_rule_edit_tab_coupons_grid"
+                           name="giftpromo_promo_rule_edit_tab_coupons_grid"/>
+                </block>
+                <action method="addTab">
+                    <name>main_section</name>
+                    <block>giftpromo_promo_rule_edit_tab_main</block>
+                </action>
+                <action method="addTab">
+                    <name>conditions_section</name>
+                    <block>giftpromo_promo_rule_edit_tab_conditions</block>
+                </action>
+                <action method="addTab">
+                    <name>actions_section</name>
+                    <block>giftpromo_promo_rule_edit_tab_actions</block>
+                </action>
+            </block>
+            <block type="adminhtml/template" template="promo/salesrulejs.phtml" name="promo_quote_edit_jsinit"/>
+        </reference>
+        <reference name="content">
+            <block type="giftpromo/adminhtml_promo_rule_edit" name="giftpromo_promo_rule_edit"></block>
+        </reference>
+    </adminhtml_promo_rule_edit>
+
+    <adminhtml_promo_rule_couponsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="giftpromo/adminhtml_promo_rule_edit_tab_coupons_grid"
+                   name="giftpromo_promo_rule_edit_tab_coupons_grid"/>
+        </block>
+    </adminhtml_promo_rule_couponsgrid>
+
+</layout>

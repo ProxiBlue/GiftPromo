@@ -1,0 +1,10 @@
+<div class="product-options" id="product-options-wrapper">
+    <?php $children = $this->getSortedChildBlocks(); ?>
+    <?php foreach ($children as $child): ?>
+        <?php echo $child->setProduct($this->getProduct())->toHtml()?>
+    <?php endforeach; ?>
+    <?php if ($this->hasRequiredOptions() && $this->getProduct()->getTypeId() != ProxiBlue_GiftPromo_Model_Product_Type_Gift_Downloadable::TYPE_DOWNLOADABLE):?>
+        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+    <?php endif;?>
+</div>
+<script type="text/javascript">decorateGeneric($$('#product-options-wrapper dl'), ['last']);</script>
