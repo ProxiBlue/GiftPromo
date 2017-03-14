@@ -26,4 +26,4 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-(Common isues and ways to debug)[https://github.com/ProxiBlue/GiftPromo/wiki/Common-Issues-and-ways-to-debug:]
+Common issues and ways to debug: [https://github.com/ProxiBlue/GiftPromo/wiki/Common-Issues-and-ways-to-debug:]
