@@ -47,13 +47,6 @@
                 <template>giftpromo/cart/minicart/default.phtml</template>
             </action>
         </reference>
-        <reference name="content">
-            <block type="giftpromo/banners_placement" name="banner_top_category_discount" template="giftpromo/notices.phtml" before="-">
-                <action method="setPlacement">
-                    <value>content_top</value>
-                </action>
-            </block>
-        </reference>
     </default>
 
     <checkout_cart_index translate="label">
@@ -107,11 +100,6 @@
             </action>
         </reference>
         <reference name="checkout.cart.form.before">
-            <block type="giftpromo/banners_placement" name="banner_top_cart" template="giftpromo/banners/placement.phtml" before="-">
-                <action method="setPlacement">
-                    <value>checkout_cart_top</value>
-                </action>
-            </block>
             <block type="giftpromo/cart_selectgifts" name="cart.select.gifts" after="-"
                    template="giftpromo/cart/selectgifts.phtml">
                 <block type="giftpromo/product_view" name="gift-configurable.product.info.options.wrapper"
@@ -189,14 +177,6 @@
                     </action>
                 </block>
 
-            </block>
-        </reference>
-
-        <reference name="shopping.cart.table.after">
-            <block type="giftpromo/banners_placement" name="banner_bottom_cart" template="giftpromo/banners/placement.phtml" before="-">
-                <action method="setPlacement">
-                    <value>checkout_cart_bottom</value>
-                </action>
             </block>
         </reference>
 
@@ -485,42 +465,6 @@
                 <script>giftpromo/lightslider.js</script>
             </action>
         </reference>
-        <reference name="content">
-            <block type="giftpromo/banners_placement" name="banner_top_category" template="giftpromo/banners/placement.phtml" before="-">
-                <action method="setPlacement">
-                    <value>content_top</value>
-                </action>
-            </block>
-            <block type="giftpromo/banners_placement" name="banner_bottom_category" template="giftpromo/banners/placement.phtml" after="-">
-                <action method="setBannerPosition">
-                    <value>content_bottom</value>
-                </action>
-            </block>
-        </reference>
-        <reference name="left">
-            <block type="giftpromo/banners_placement" name="banner_left_top_column" template="giftpromo/banners/placement.phtml" before="-">
-                <action method="setBannerPosition">
-                    <value>content_left_top</value>
-                </action>
-            </block>
-            <block type="giftpromo/banners_placement" name="banner_left_bottom_column" template="giftpromo/banners/placement.phtml" after="-">
-                <action method="setBannerPosition">
-                    <value>content_left_bottom</value>
-                </action>
-            </block>
-        </reference>
-        <reference name="right">
-            <block type="giftpromo/banners_placement" name="banner_right_top_column" template="giftpromo/banners/placement.phtml" before="-">
-                <action method="setBannerPosition">
-                    <value>content_right_top</value>
-                </action>
-            </block>
-            <block type="giftpromo/banners_placement" name="banner_right_bottom_column" template="giftpromo/banners/placement.phtml" after="-">
-                <action method="setBannerPosition">
-                    <value>content_right_bottom</value>
-                </action>
-            </block>
-        </reference>
     </catalog_category_default>
 
     <catalog_category_layered>
@@ -534,42 +478,6 @@
             <action method="addJs">
                 <script>giftpromo/lightslider.js</script>
             </action>
-        </reference>
-        <reference name="content">
-            <block type="giftpromo/banners_placement" name="banner_top_category" template="giftpromo/banners/placement.phtml" before="-">
-                <action method="setBannerPosition">
-                    <value>content_top</value>
-                </action>
-            </block>
-            <block type="giftpromo/banners_placement" name="banner_bottom_category" template="giftpromo/banners/placement.phtml" after="-">
-                <action method="setBannerPosition">
-                    <value>content_bottom</value>
-                </action>
-            </block>
-        </reference>
-        <reference name="left">
-            <block type="giftpromo/banners_placement" name="banner_left_top_column" template="giftpromo/banners/placement.phtml" before="-">
-                <action method="setBannerPosition">
-                    <value>content_left_top</value>
-                </action>
-            </block>
-            <block type="giftpromo/banners_placement" name="banner_left_bottom_column" template="giftpromo/banners/placement.phtml" after="-">
-                <action method="setBannerPosition">
-                    <value>content_left_bottom</value>
-                </action>
-            </block>
-        </reference>
-        <reference name="right">
-            <block type="giftpromo/banners_placement" name="banner_right_top_column" template="giftpromo/banners/placement.phtml" before="-">
-                <action method="setBannerPosition">
-                    <value>content_right_top</value>
-                </action>
-            </block>
-            <block type="giftpromo/banners_placement" name="banner_right_bottom_column" template="giftpromo/banners/placement.phtml" after="-">
-                <action method="setBannerPosition">
-                    <value>content_right_bottom</value>
-                </action>
-            </block>
         </reference>
     </catalog_category_layered>
 
@@ -592,42 +500,6 @@
             <action method="addJs">
                 <script>giftpromo/lightslider.js</script>
             </action>
-        </reference>
-        <reference name="content">
-            <block type="giftpromo/banners_placement" name="banner_top_cms" template="giftpromo/banners/placement.phtml" before="-">
-                <action method="setBannerPosition">
-                    <value>content_top</value>
-                </action>
-            </block>
-            <block type="giftpromo/banners_placement" name="banner_top_bottom" template="giftpromo/banners/placement.phtml" after="-">
-                <action method="setBannerPosition">
-                    <value>content_bottom</value>
-                </action>
-            </block>
-        </reference>
-        <reference name="left">
-            <block type="giftpromo/banners_placement" name="banner_left_top_column" template="giftpromo/banners/placement.phtml" before="-">
-                <action method="setBannerPosition">
-                    <value>content_left_top</value>
-                </action>
-            </block>
-            <block type="giftpromo/banners_placement" name="banner_left_bottom_column" template="giftpromo/banners/placement.phtml" after="-">
-                <action method="setBannerPosition">
-                    <value>content_left_bottom</value>
-                </action>
-            </block>
-        </reference>
-        <reference name="right">
-            <block type="giftpromo/banners_placement" name="banner_right_top_column" template="giftpromo/banners/placement.phtml" before="-">
-                <action method="setBannerPosition">
-                    <value>content_right_top</value>
-                </action>
-            </block>
-            <block type="giftpromo/banners_placement" name="banner_right_bottom_column" template="giftpromo/banners/placement.phtml" after="-">
-                <action method="setBannerPosition">
-                    <value>content_right_bottom</value>
-                </action>
-            </block>
         </reference>
     </cms_page_view>
 
