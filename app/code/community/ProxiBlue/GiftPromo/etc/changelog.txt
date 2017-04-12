@@ -204,3 +204,5 @@
 2.40.0  : This is a recovery release. Since v 2.30.0, the functionality has become unstable.
         : The release was rilled back, and fixes from 2.30.1 to 2.39.0 was re-applied, but functionality that cuased (suspected)
         : was stripped out.
+2.4.1   : ?
+2.4.2	: Remeve referals to non existant banners block
