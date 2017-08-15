@@ -22,6 +22,9 @@ class ProxiBlue_GiftPromo_Model_Sales_Quote_Item extends Mage_Sales_Model_Quote_
      */
     public function representProduct($product)
     {
+        if (!is_object($product)) {
+            return false;
+        }
         // bundles and non free are always as single line items
         if ($product->getTypeId() == ProxiBlue_GiftPromo_Model_Product_Type_Gift_Bundle::TYPE_CODE
             || $product->getGiftedPrice() > 0
