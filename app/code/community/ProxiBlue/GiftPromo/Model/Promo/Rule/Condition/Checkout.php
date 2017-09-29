@@ -46,7 +46,7 @@ class ProxiBlue_GiftPromo_Model_Promo_Rule_Condition_Checkout extends Mage_Sales
         switch ($this->getAttribute()) {
             case 'payment_method':
                 if (!$address->hasPaymentMethod()) {
-                    $address->setPaymentMethod($object->getPayment()->getMethod());
+                    $address->setPaymentMethod($object->getPayment() ? $object->getPayment()->getMethod() : null);
                 }
                 if(is_null($address->getPaymentMethod())){
                     Mage::helper('giftpromo')->removeRuleCartItems($this->getRule(), $object);
@@ -74,7 +74,7 @@ class ProxiBlue_GiftPromo_Model_Promo_Rule_Condition_Checkout extends Mage_Sales
                 break;
             case 'shipping_method':
                 if (!$address->hasShippingMethod()) {
-                    $address->setShippingMethod($object->getShipping()->getMethod());
+                    $address->setShippingMethod($object->getShipping() ? $object->getShipping()->getMethod() : null);
                 }
 
                 switch ($this->getOperator()) {
