@@ -206,3 +206,4 @@
         : was stripped out.
 2.4.1   : ?
 2.4.2	: Remeve referals to non existant banners block
+2.4.3	: Prevent recursive loop when some customer accounts are laoded, and they have gift items that are no longer available in stale quotes
