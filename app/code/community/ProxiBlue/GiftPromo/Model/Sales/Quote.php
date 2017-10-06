@@ -20,6 +20,7 @@ class ProxiBlue_GiftPromo_Model_Sales_Quote extends Mage_Sales_Model_Quote
         if (1 == $this->getData('trigger_recollect')
             && !Mage::getSingleton('checkout/session')->getSkipTriggerCollect()
         ) {
+            $this->_preventSaving = true;
             $this->collectTotals()->save();
         }
         Mage::getSingleton('checkout/session')->setSkipTriggerCollect(false);
