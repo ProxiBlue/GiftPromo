@@ -94,7 +94,7 @@ class ProxiBlue_GiftPromo_Model_Promo_Rule_Condition_Checkout extends Mage_Sales
                         break;
 
                 }
-                $this->_getHelper()->removeRuleCartItems($this->getRule(), $object);
+                Mage::helper('giftpromo')->removeRuleCartItems($this->getRule(), $object);
                 return false;
                 break;
         }
