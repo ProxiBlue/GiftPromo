@@ -2,7 +2,7 @@
 <config>
     <modules>
         <ProxiBlue_GiftPromo>
-            <version>2.40.3</version>
+            <version>2.40.4</version>
             <depends>
                 <Mage_Core/>
                 <Mage_Catalog/>
