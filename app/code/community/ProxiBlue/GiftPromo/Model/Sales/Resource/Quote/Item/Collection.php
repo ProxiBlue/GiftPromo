@@ -116,7 +116,7 @@ class ProxiBlue_GiftPromo_Model_Sales_Resource_Quote_Item_Collection
         foreach ($this->getItems() as $item) {
             $arr[] = $item->getProductId();
         }
-
+        $arr = array_filter($arr); // remove any nulls
         return array_count_values($arr);
     }
 
