@@ -34,7 +34,7 @@ class ProxiBlue_GiftPromo_Model_Promo_Gift extends Mage_Sales_Model_Quote_Addres
     {
         // prevents gifting to be called recursively on itself, whilst it is busy calculating gifting.
         // this can happen when a customer logs in and there is some oddity in the session data (old gifts, old products, persistent)
-        //if (mage::registry('giftpromo_busy') != true) {
+        if (mage::registry('giftpromo_busy') != true) {
             if (Mage::getSingleton('core/session')->getSkipRules() != true) {
                 mage::register('giftpromo_busy', true, true);
                 parent::collect($address);
@@ -51,7 +51,7 @@ class ProxiBlue_GiftPromo_Model_Promo_Gift extends Mage_Sales_Model_Quote_Addres
                 $this->_validator->init($store->getWebsiteId(), $quote->getCustomerGroupId(), $quote->getCouponCode());
                 $this->_validator->processGiftRules($address, $store->getWebsiteId());
             }
-        //}
+        }
 
         return $this;
     }
