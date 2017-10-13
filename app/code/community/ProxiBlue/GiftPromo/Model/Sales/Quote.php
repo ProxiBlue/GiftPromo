@@ -25,7 +25,7 @@ class ProxiBlue_GiftPromo_Model_Sales_Quote extends Mage_Sales_Model_Quote
         }
         Mage::getSingleton('checkout/session')->setSkipTriggerCollect(false);
 
-        return call_user_func(array(get_parent_class(get_parent_class($this)), '_afterLoad'));
+        return Mage_Core_Model_Abstract::_afterLoad();
     }
 
 
