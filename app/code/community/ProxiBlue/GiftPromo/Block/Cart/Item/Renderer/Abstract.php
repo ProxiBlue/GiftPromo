@@ -117,7 +117,13 @@ class ProxiBlue_GiftPromo_Block_Cart_Item_Renderer_Abstract extends Mage_Checkou
 
     public function canDoQty($item)
     {
-        if($item->getPrice() > 0) {
+        $buyRequest = Mage::helper('giftpromo')->isAddedAsGift($this->getItem());
+        if (!is_object($buyRequest)) {
+            return true;
+        }
+        $ruleObject = Mage::getModel('giftpromo/promo_rule')->load($buyRequest->getAddedByRule());
+
+        if (($item->getPrice() > 0) && !$ruleObject->getBlockQtyChanges()) {
             return true;
         }
         return false;
