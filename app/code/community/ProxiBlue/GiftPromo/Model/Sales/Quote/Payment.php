@@ -14,9 +14,10 @@ class ProxiBlue_GiftPromo_Model_Sales_Quote_Payment extends Mage_Sales_Model_Quo
      */
     public function importData(array $data)
     {
-        mage::register('giftpromo_busy', true, true);
-        return parent::importData($data);
-        mage::register('giftpromo_busy', false, true);
+        Mage::register('giftpromo_busy', true, true);
+        $result = parent::importData($data);
+        Mage::register('giftpromo_busy', false, true);
+        return $result;
     }
 
 }
